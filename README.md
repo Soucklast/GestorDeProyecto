@@ -45,39 +45,43 @@ Ofrece informes detallados, visualizaciones de progreso y notificaciones automá
 - Cuenta de GitHub para clonar el repositorio  
 
 ---
-## Funcionalidades Clave con imágenes
-Para iniciar sesión en Project Manager, simplemente ingresa tu correo electrónico y contraseña en el formulario de acceso. El sistema validará automáticamente tus credenciales:
-<img width="1919" height="903" alt="image" src="https://github.com/user-attachments/assets/6cd633a9-cfd7-430c-943a-e3cc869920e9" />
+¡Entendido! Aquí tienes solo la sección que me pediste, con el formato adecuado para tu `README.md`:
 
-pagiina inicio
-n la página de inicio encontrarás:
+---
 
-Tabla principal de Proyectos y Tareas
-En el área central se muestra una tabla interactiva que te permite gestionar todo el ciclo CRUD (Crear, Leer, Actualizar, Eliminar) de tus proyectos y sus respectivas tareas. Desde aquí puedes:
+## Funcionalidades Clave
 
-Agregar un nuevo proyecto o tarea con un solo clic.
+### 1. **Inicio de sesión**
 
-Editar títulos, fechas, responsables y estados directamente en línea.
+Para iniciar sesión en **Project Manager**, simplemente ingresa tu correo electrónico y contraseña en el formulario de acceso. El sistema validará automáticamente tus credenciales.
 
-Eliminar elementos que ya no sean necesarios.
+![Formulario de inicio de sesión](https://github.com/user-attachments/assets/6cd633a9-cfd7-430c-943a-e3cc869920e9)
 
-Filtrar y ordenar por nombre, fecha de entrega, estado o prioridad para enfocarte en lo más urgente.
+### 2. **Página de Inicio**
 
-Panel lateral izquierdo
+En la página de inicio encontrarás:
 
-Perfil
-Aquí verás tu foto de usuario, nombre y rol. También tienes acceso rápido a la configuración de tu cuenta (cambiar contraseña, actualizar información personal, etc.).
+#### **Tabla Principal de Proyectos y Tareas**
 
-Usuarios del equipo
-Debajo del perfil aparece una lista de los integrantes de tu equipo. Desde este panel puedes:
+En el área central, se muestra una tabla interactiva que te permite gestionar el ciclo completo de tus proyectos y tareas. Desde aquí puedes:
 
-Consultar rápidamente quién está activo.
+* **Agregar** un nuevo proyecto o tarea con un solo clic.
+* **Editar** títulos, fechas, responsables y estados directamente en línea.
+* **Eliminar** elementos que ya no sean necesarios.
+* **Filtrar y ordenar** por nombre, fecha de entrega, estado o prioridad para enfocarte en lo más urgente.
 
-Ver el rol de cada miembro (Desarrollador, Gestor, Revisor, etc.).
+#### **Panel Lateral Izquierdo**
 
-Hacer clic sobre un usuario para ver su historial de tareas y proyectos asignados.
+* **Perfil**: Aquí verás tu foto de usuario, nombre y rol. También tienes acceso rápido a la configuración de tu cuenta (cambiar contraseña, actualizar información personal, etc.).
+* **Usuarios del Equipo**: Debajo del perfil, aparece una lista de los integrantes de tu equipo. Desde este panel puedes:
 
-<img width="1919" height="910" alt="image" src="https://github.com/user-attachments/assets/0899569d-4d66-4c6a-854d-5fd5aac118dd" />
+  * Consultar rápidamente quién está activo.
+  * Ver el rol de cada miembro (Desarrollador, Gestor, Revisor, etc.).
+  * Hacer clic sobre un usuario para ver su historial de tareas y proyectos asignados.
+
+![Panel lateral izquierdo](https://github.com/user-attachments/assets/0899569d-4d66-4c6a-854d-5fd5aac118dd)
+
+---
 
 
 ## Instalación y Configuración
