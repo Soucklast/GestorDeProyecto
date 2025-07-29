@@ -50,6 +50,6 @@ Ofrece informes detallados, visualizaciones de progreso y notificaciones automá
 
 1. **Clonar el repositorio**  
    ```bash
-   git clone https://github.com/tu‑usuario/project‑manager.git
+   git clone https://github.com/Soucklast/GestorDeProyecto
    cd project‑manager
 
