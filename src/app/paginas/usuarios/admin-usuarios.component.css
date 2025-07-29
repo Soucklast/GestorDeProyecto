@@ -1,0 +1,14 @@
+.admin-usuarios-container {
+  padding: 16px;
+}
+h2 {
+  margin-bottom: 12px;
+}
+ul {
+  list-style: disc inside;
+  margin: 0 0 8px 16px;
+  padding: 0;
+}
+li {
+  margin-bottom: 4px;
+}

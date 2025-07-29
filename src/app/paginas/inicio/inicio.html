@@ -1,0 +1,26 @@
+<div class="inicio-layout">
+  <aside class="inicio-sidebar">
+    <nav class="inicio-nav">
+      <button [class.active]="vista === 'perfil'" (click)="cambiarVista('perfil')">
+        <mat-icon>person</mat-icon>
+        <span>Perfil</span>
+      </button>
+      <button [class.active]="vista === 'proyectos'" (click)="cambiarVista('proyectos')">
+        <mat-icon>folder</mat-icon>
+        <span>Proyectos</span>
+      </button>
+      <button [class.active]="vista === 'usuarios'" (click)="cambiarVista('usuarios')">
+        <mat-icon>group</mat-icon>
+        <span>Usuarios</span>
+      </button>
+    </nav>
+  </aside>
+
+  <main class="inicio-main">
+    <section class="inicio-contenido">
+      <app-perfil *ngIf="vista === 'perfil'"></app-perfil>
+      <app-componente-proyectos *ngIf="vista === 'proyectos'"></app-componente-proyectos>
+      <app-admin-usuarios *ngIf="vista === 'usuarios'"></app-admin-usuarios>
+    </section>
+  </main>
+</div>

@@ -1,0 +1,24 @@
+<div class="admin-usuarios-container">
+  <h2>Usuarios del Proyecto</h2>
+  <div *ngIf="proyectoSeleccionado; else seleccionaProyecto">
+    <h3>{{ proyectoSeleccionado.nombre }}</h3>
+    <table *ngIf="usuariosDelProyecto.length > 0" class="usuarios-table">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Correo</th>
+          <th>Rol</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of usuariosDelProyecto">
+          
+        </tr>
+      </tbody>
+    </table>
+    <div *ngIf="usuariosDelProyecto.length === 0">No hay usuarios asignados a este proyecto.</div>
+  </div>
+  <ng-template #seleccionaProyecto>
+    <div>Selecciona un proyecto para ver sus usuarios.</div>
+  </ng-template>
+</div>

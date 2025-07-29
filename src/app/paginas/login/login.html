@@ -1,0 +1,55 @@
+<div class="auth-bg">
+  <div class="auth-container" [class.right-panel-active]="isSignUp">
+    <!-- Sign In Form -->
+    <div class="auth-form auth-form-signin" *ngIf="!isSignUp">
+      <h2>Iniciar Sesión</h2>
+      <div class="auth-subtitle">
+        ¿Nuevo en el gestor? <a href="#" (click)="togglePanel(true)">Regístrate</a>
+      </div>
+      <form (ngSubmit)="login()" autocomplete="off">
+        <div class="input-group">
+          <label for="login-username">Correo</label>
+          <input id="login-username" type="text" [(ngModel)]="username" name="username" placeholder="Tu usuario" required />
+        </div>
+        <div class="input-group">
+          <label for="login-password">Contraseña</label>
+          <input id="login-password" type="password" [(ngModel)]="password" name="password" placeholder="Ingresa tu contraseña" required minlength="5" />
+        </div>
+        <button type="submit" class="auth-btn">ENTRAR</button>
+        <div class="error" *ngIf="error">{{ error }}</div>
+      </form>
+    </div>
+    <!-- Sign Up Form -->
+    <div class="auth-form auth-form-signup" *ngIf="isSignUp">
+      <h2>Crear Cuenta</h2>
+      <div class="auth-subtitle">
+        ¿Ya tienes cuenta? <a href="#" (click)="togglePanel(false)">Inicia sesión</a>
+      </div>
+      <form (ngSubmit)="register()" autocomplete="off">
+        <div class="input-group">
+          <label for="signup-username">Usuario</label>
+          <input id="signup-username" type="text" [(ngModel)]="signupName" name="signupName" placeholder="Tu usuario" required />
+        </div>
+        <div class="input-group">
+          <label for="signup-email">Correo electrónico</label>
+          <input id="signup-email" type="email" [(ngModel)]="signupEmail" name="signupEmail" placeholder="tucorreo@ejemplo.com" required />
+        </div>
+        <div class="input-group">
+          <label for="signup-password">Contraseña</label>
+          <input id="signup-password" type="password" [(ngModel)]="signupPassword" name="signupPassword" placeholder="Mínimo 5 caracteres" required minlength="5" />
+        </div>
+        <button type="submit" class="auth-btn">REGISTRARME</button>
+        <div class="error" *ngIf="signupError">{{ signupError }}</div>
+      </form>
+    </div>
+    <!-- Right: Welcome Panel -->
+    <div class="auth-panel">
+      <div class="panel-content">
+        <h1 *ngIf="!isSignUp">Bienvenido a<br>Gestor de Proyectos</h1>
+        <h1 *ngIf="isSignUp">Únete al<br>Gestor de Proyectos</h1>
+        <p *ngIf="!isSignUp">Accede para gestionar tus proyectos, tareas y equipos.</p>
+        <p *ngIf="isSignUp">Regístrate para comenzar a organizar tus proyectos.</p>
+      </div>
+    </div>
+  </div>
+</div>

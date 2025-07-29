@@ -1,0 +1,16 @@
+<div class="perfil-container">
+  <div class="perfil-card" *ngIf="usuario">
+    <img class="perfil-foto" [src]="usuario.imagen" alt="Foto de perfil">
+    <div class="perfil-info">
+      <h2>{{ usuario.nombre }}</h2>
+      <p><strong>Correo:</strong> {{ usuario.email }}</p>
+      <p><strong>Rol:</strong> {{ usuario.rol }}</p>
+      <p><strong>Equipos ID:</strong> {{ usuario.equipos_id }}</p>
+      <p><strong>Creado:</strong> {{ usuario.created_at }}</p>
+      <p><strong>Actualizado:</strong> {{ usuario.updated_at }}</p>
+    </div>
+  </div>
+  <div *ngIf="!usuario">
+    <p>No se pudo cargar la información del usuario.</p>
+  </div>
+</div>
