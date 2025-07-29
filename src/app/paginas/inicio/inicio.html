@@ -13,6 +13,10 @@
         <mat-icon>group</mat-icon>
         <span>Usuarios</span>
       </button>
+      <button [class.active]="vista === 'calendario'" (click)="cambiarVista('calendario')">
+        <mat-icon>calendar_month</mat-icon>
+        <span>Calendario</span>
+      </button>
     </nav>
   </aside>
 
@@ -21,6 +25,7 @@
       <app-perfil *ngIf="vista === 'perfil'"></app-perfil>
       <app-componente-proyectos *ngIf="vista === 'proyectos'"></app-componente-proyectos>
       <app-admin-usuarios *ngIf="vista === 'usuarios'"></app-admin-usuarios>
+      <app-componente-calendario *ngIf="vista === 'calendario'"></app-componente-calendario>
     </section>
   </main>
 </div>

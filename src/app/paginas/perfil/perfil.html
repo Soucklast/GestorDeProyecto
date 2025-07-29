@@ -9,6 +9,7 @@
       <p><strong>Creado:</strong> {{ usuario.created_at }}</p>
       <p><strong>Actualizado:</strong> {{ usuario.updated_at }}</p>
     </div>
+    <button (click)="cerrarSesion()" class="btn-cerrar-sesion">Cerrar sesión</button>
   </div>
   <div *ngIf="!usuario">
     <p>No se pudo cargar la información del usuario.</p>

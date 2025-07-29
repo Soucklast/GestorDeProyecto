@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ComponenteProyectosComponent } from '../../componentes/componente-proyectos/componente-proyectos';
 import { Perfil } from '../perfil/perfil';
 import { AdminUsuariosComponent } from '../usuarios/admin-usuarios.component';
+import { ComponenteCalendarioComponent } from '../../componentes/componente-calendario/componente-calendario';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
@@ -15,6 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
     ComponenteProyectosComponent,
     Perfil,
     AdminUsuariosComponent,
+    ComponenteCalendarioComponent,
     MatIconModule,
     MatButtonModule,
     HttpClientModule
@@ -23,9 +25,9 @@ import { HttpClientModule } from '@angular/common/http';
   styleUrls: ['./inicio.css']
 })
 export class InicioComponent {
-  vista: 'perfil' | 'proyectos' | 'usuarios' = 'proyectos';
+  vista: 'perfil' | 'proyectos' | 'usuarios' | 'calendario' = 'proyectos';
 
-  cambiarVista(v: 'perfil' | 'proyectos' | 'usuarios') {
+  cambiarVista(v: 'perfil' | 'proyectos' | 'usuarios' | 'calendario') {
     this.vista = v;
   }
 }

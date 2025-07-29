@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { ChangeDetectorRef } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-perfil',
@@ -13,7 +14,7 @@ import { ChangeDetectorRef } from '@angular/core';
 export class Perfil {
   usuario: any = null;
 
-  constructor(private http: HttpClient, private cdr: ChangeDetectorRef) {
+  constructor(private http: HttpClient, private cdr: ChangeDetectorRef, private router: Router) {
     const userId = localStorage.getItem('userId');
     if (userId) {
       this.http.get<any[]>('http://34.70.174.29/api/usuarios').subscribe(
@@ -35,5 +36,10 @@ export class Perfil {
         }
       );
     }
+  }
+
+  cerrarSesion() {
+    localStorage.clear();
+    this.router.navigate(['/login']);
   }
 }

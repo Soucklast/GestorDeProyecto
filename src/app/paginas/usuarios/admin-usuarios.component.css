@@ -1,14 +1,58 @@
+
+
 .admin-usuarios-container {
-  padding: 16px;
+  padding: 24px;
+  background: #faf7fc;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(126, 87, 194, 0.10);
+  max-width: 800px;
+  margin: 32px auto;
 }
 h2 {
-  margin-bottom: 12px;
+  margin-bottom: 18px;
+  color: #7e57c2;
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
 }
-ul {
-  list-style: disc inside;
-  margin: 0 0 8px 16px;
-  padding: 0;
+.equipos-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #fff;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(126, 87, 194, 0.08);
+  margin: 0 auto 24px auto;
 }
-li {
-  margin-bottom: 4px;
+.equipos-table th, .equipos-table td {
+  padding: 14px 18px;
+  text-align: left;
+}
+.equipos-table th {
+  background: #7e57c2;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.1rem;
+  border-bottom: 2px solid #ede7f6;
+}
+.equipos-table tr {
+  transition: background 0.2s;
+}
+.equipos-table tbody tr:hover {
+  background: #ede7f6;
+}
+.equipos-table td {
+  font-size: 1rem;
+  color: #4a326e;
+  border-bottom: 1px solid #f3eaff;
+}
+.equipos-table tr:last-child td {
+  border-bottom: none;
+}
+.equipos-loading, .equipos-error {
+  text-align: center;
+  margin: 24px 0;
+  font-size: 1.1rem;
+  color: #7e57c2;
 }

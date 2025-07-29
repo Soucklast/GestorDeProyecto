@@ -1,0 +1,30 @@
+<div class="cal-header">
+  <button mat-icon-button (click)="prevMonth()">
+    <mat-icon>chevron_left</mat-icon>
+  </button>
+  <button mat-button (click)="goToday()">Hoy</button>
+  <button mat-icon-button (click)="nextMonth()">
+    <mat-icon>chevron_right</mat-icon>
+  </button>
+  <span class="month-title">{{ viewDate | date:'LLLL yyyy' }}</span>
+</div>
+
+<table class="calendar">
+  <thead>
+    <tr>
+      <th *ngFor="let day of ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb']">{{ day }}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let week of weeks">
+      <td *ngFor="let date of week" [class.other-month]="date.getMonth() !== viewDate.getMonth()">
+        <div class="date-number">{{ date.getDate() }}</div>
+        <div class="events">
+          <div *ngFor="let ev of getEventsForDate(date)" class="event" (click)="openEvent(ev)">
+            {{ ev.title }}
+          </div>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>

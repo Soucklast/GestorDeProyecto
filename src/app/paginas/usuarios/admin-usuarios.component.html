@@ -1,24 +1,45 @@
 <div class="admin-usuarios-container">
-  <h2>Usuarios del Proyecto</h2>
-  <div *ngIf="proyectoSeleccionado; else seleccionaProyecto">
-    <h3>{{ proyectoSeleccionado.nombre }}</h3>
-    <table *ngIf="usuariosDelProyecto.length > 0" class="usuarios-table">
-      <thead>
-        <tr>
-          <th>Nombre</th>
-          <th>Correo</th>
-          <th>Rol</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let user of usuariosDelProyecto">
-          
-        </tr>
-      </tbody>
-    </table>
-    <div *ngIf="usuariosDelProyecto.length === 0">No hay usuarios asignados a este proyecto.</div>
+  <h2>Equipos en los que participas</h2>
+  <div *ngIf="loadingEquipos" class="equipos-loading">Cargando equipos...</div>
+  <div *ngIf="errorEquipos" class="equipos-error">{{ errorEquipos }}</div>
+  <table *ngIf="!loadingEquipos && !errorEquipos && equipos.length > 0" class="equipos-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Integrantes</th>
+        <th>Fecha de creación</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let equipo of equipos">
+        <td>{{ equipo.id }}</td>
+        <td>{{ equipo.nombre }}</td>
+        <td>
+          <span *ngIf="equipo.integrantes && equipo.integrantes.length > 0; else sinIntegrantes">
+            <span *ngFor="let user of equipo.integrantes; let last = last">
+              {{ user.nombre }}<span *ngIf="!last">, </span>
+            </span>
+          </span>
+          <ng-template #sinIntegrantes>
+            <span style="color:#b39ddb">Sin integrantes</span>
+          </ng-template>
+          <div style="margin-top:8px">
+            <select [(ngModel)]="usuarioAAgregar[equipo.id]" aria-label="Agregar usuario al equipo">
+              <option value="" disabled>Agregar usuario...</option>
+              <option *ngFor="let user of getUsuariosNoIntegrantes(equipo)" [value]="user.id">{{ user.nombre }}</option>
+            </select>
+            <button type="button" (click)="agregarUsuarioAEquipo(equipo)" [disabled]="!usuarioAAgregar[equipo.id] || agregandoUsuario[equipo.id]" style="margin-left:6px; background:#7e57c2; color:#fff; border:none; border-radius:4px; padding:4px 12px; cursor:pointer;">
+              <span *ngIf="!agregandoUsuario[equipo.id]">Agregar</span>
+              <span *ngIf="agregandoUsuario[equipo.id]">...</span>
+            </button>
+          </div>
+        </td>
+        <td>{{ equipo.created_at | date:'short' }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <div *ngIf="!loadingEquipos && !errorEquipos && equipos.length === 0">
+    No participas en ningún equipo.
   </div>
-  <ng-template #seleccionaProyecto>
-    <div>Selecciona un proyecto para ver sus usuarios.</div>
-  </ng-template>
 </div>
