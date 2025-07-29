@@ -45,6 +45,40 @@ Ofrece informes detallados, visualizaciones de progreso y notificaciones automá
 - Cuenta de GitHub para clonar el repositorio  
 
 ---
+## Funcionalidades Clave con imágenes
+Para iniciar sesión en Project Manager, simplemente ingresa tu correo electrónico y contraseña en el formulario de acceso. El sistema validará automáticamente tus credenciales:
+<img width="1919" height="903" alt="image" src="https://github.com/user-attachments/assets/6cd633a9-cfd7-430c-943a-e3cc869920e9" />
+
+pagiina inicio
+n la página de inicio encontrarás:
+
+Tabla principal de Proyectos y Tareas
+En el área central se muestra una tabla interactiva que te permite gestionar todo el ciclo CRUD (Crear, Leer, Actualizar, Eliminar) de tus proyectos y sus respectivas tareas. Desde aquí puedes:
+
+Agregar un nuevo proyecto o tarea con un solo clic.
+
+Editar títulos, fechas, responsables y estados directamente en línea.
+
+Eliminar elementos que ya no sean necesarios.
+
+Filtrar y ordenar por nombre, fecha de entrega, estado o prioridad para enfocarte en lo más urgente.
+
+Panel lateral izquierdo
+
+Perfil
+Aquí verás tu foto de usuario, nombre y rol. También tienes acceso rápido a la configuración de tu cuenta (cambiar contraseña, actualizar información personal, etc.).
+
+Usuarios del equipo
+Debajo del perfil aparece una lista de los integrantes de tu equipo. Desde este panel puedes:
+
+Consultar rápidamente quién está activo.
+
+Ver el rol de cada miembro (Desarrollador, Gestor, Revisor, etc.).
+
+Hacer clic sobre un usuario para ver su historial de tareas y proyectos asignados.
+
+<img width="1919" height="910" alt="image" src="https://github.com/user-attachments/assets/0899569d-4d66-4c6a-854d-5fd5aac118dd" />
+
 
 ## Instalación y Configuración
 
