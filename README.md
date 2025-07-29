@@ -1,59 +1,55 @@
-# GestorDeProyectos
+# Project Manager – Sistema de Gestión de Proyectos
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.1.0.
+**Equipo 12**
 
-## Development server
+---
 
-To start a local development server, run:
+## Integrantes
 
-```bash
-ng serve
-```
+- **José Axel Vera Ortiz** – Desarrollador Full‑Stack y Coordinador de Equipo  
+- **Arisaí López Martínez** – Diseñadora de Interfaz y Gestora de Calidad  
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## ¿Qué hace el sistema?
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Project Manager es una plataforma web diseñada para la gestión integral de proyectos y sus tareas asociadas.  
+Permite a los equipos organizar flujos de trabajo, asignar responsabilidades, establecer fechas límite y hacer seguimiento del avance en tiempo real.  
+Ofrece informes detallados, visualizaciones de progreso y notificaciones automáticas para asegurar que cada entregable se complete según lo previsto.
 
-```bash
-ng generate component component-name
-```
+---
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Características Principales
 
-```bash
-ng generate --help
-```
+1. **Gestión de Proyectos**  
+   - Creación, edición y eliminación de proyectos.  
+   - Cronogramas y diagramas de Gantt interactivos.  
+2. **Control de Tareas**  
+   - Asignación de tareas a miembros del equipo con fechas de entrega.  
+   - Estado de tarea (Pendiente, En Progreso, Completada).  
+3. **Colaboración en Equipo**  
+   - Comentarios y archivos adjuntos por tarea.  
+   - Notificaciones por correo y dentro de la plataforma.  
+4. **Reportes y Métricas**  
+   - Tableros de indicadores (KPIs) de rendimiento.  
+   - Exportación de reportes en PDF y CSV.  
+5. **Roles y Permisos**  
+   - Control de acceso diferenciado (Administrador, Gestor, Colaborador).  
+   - Gestión de perfiles y permisos por función.
 
-## Building
+## Requisitos Previos
 
-To build the project run:
+- [Node.js](https://nodejs.org/) v14+  
+- [Angular CLI](https://angular.io/cli)  
+- [PostgreSQL](https://www.postgresql.org/)  
+- Cuenta de GitHub para clonar el repositorio  
 
-```bash
-ng build
-```
+---
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## Instalación y Configuración
 
-## Running unit tests
+1. **Clonar el repositorio**  
+   ```bash
+   git clone https://github.com/tu‑usuario/project‑manager.git
+   cd project‑manager
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
