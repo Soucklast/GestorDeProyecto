@@ -81,6 +81,14 @@ En el área central, se muestra una tabla interactiva que te permite gestionar e
 
 ![Panel lateral izquierdo](https://github.com/user-attachments/assets/0899569d-4d66-4c6a-854d-5fd5aac118dd)
 
+
+
+#### **Panel Proyectos**
+<img width="1280" height="356" alt="image" src="https://github.com/user-attachments/assets/684e2a7a-b3b2-47e6-818a-2816122a8d01" />
+
+
+
+
 ---
 
 
