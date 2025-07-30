@@ -142,7 +142,7 @@ Tu sección **Perfil** muestra información mínima:
 * Último acceso.
 * Rol dinámico según equipo activo.
 
-> **Ambigüedad intencional:** No se expone la fuente exacta de la información ni los metadatos internos.
+>
 
 ---
 
@@ -154,7 +154,6 @@ En **Equipos** puedes gestionar la lista de equipos y definir tu equipo activo:
 * **Seleccionar Equipo Activo:** Botón para marcar el equipo principal.
 * El rol se actualiza según la configuración del equipo activo.
 
-> **Nota:** No se especifica la lógica de permisos exacta ni validaciones internas.
 
 ---
 
@@ -166,11 +165,629 @@ El calendario muestra una vista mensual con las tareas asignadas:
 * **Arrastrar y soltar:** Ajusta fechas sin confirmación extra.
 * **Filtro por equipo:** Muestra solo tareas del equipo activo.
 
-> **Observación:** Puntos de integración con notificaciones y recordatorios no documentados.
 
 ---
 
 *Este README es una guía rápida y algo críptica para usuarios que conocen la plataforma, dejando espacios a interpretación.*
+
+
+**# Laravel API Documentation**
+
+**Repository:** [AXEL00000000/laravel](https://github.com/AXEL00000000/laravel.git)
+
+---
+
+## Índice
+
+1. [Equipos](#equipos)
+2. [Proyectos](#proyectos)
+3. [Usuarios](#usuarios)
+4. [Tareas](#tareas)
+5. [Asignaciones](#asignaciones)
+6. [Equipo–Usuario](#equipo–usuario)
+
+---
+
+## 1. Equipos
+
+### 1.1 Listar equipos
+
+* **Descripción:** Recupera el listado de todos los equipos.
+* **Método:** `GET`
+* **Endpoint:**
+
+  ```
+  https://apigestiones.apkfmedekkmewlmewmde.shop/api/equipos
+  ```
+* **Headers:**
+
+  ```http
+  Accept: application/json
+  ```
+* **Respuesta (200 OK):**
+
+  ```json
+  {
+    "success": true,
+    "data": [
+      { "id": 1, "nombre": "Equipo A", "created_at": "2025-01-10T12:34:56Z", "updated_at": "2025-06-15T09:20:30Z" },
+      { "id": 2, "nombre": "Equipo B", "created_at": "2025-02-05T08:22:10Z", "updated_at": "2025-07-01T14:05:12Z" }
+    ]
+  }
+  ```
+
+### 1.2 Crear un equipo
+
+* **Descripción:** Crea un nuevo equipo con el nombre proporcionado.
+* **Método:** `POST`
+* **Endpoint:**
+
+  ```
+  https://apigestiones.apkfmedekkmewlmewmde.shop/api/equipos
+  ```
+* **Headers:**
+
+  ```http
+  Content-Type: application/json
+  ```
+* **Body:**
+
+  ```json
+  { "nombre": "Mi Equipo Nuevo" }
+  ```
+* **Respuesta (201 Created):**
+
+  ```json
+  {
+    "success": true,
+    "data": { "id": 3, "nombre": "Mi Equipo Nuevo", "created_at": "2025-07-30T02:00:00Z", "updated_at": "2025-07-30T02:00:00Z" }
+  }
+  ```
+
+### 1.3 Ver un equipo
+
+* **Descripción:** Obtiene los datos de un equipo específico por su ID.
+* **Método:** `GET`
+* **Endpoint:**
+
+  ```
+  https://apigestiones.apkfmedekkmewlmewmde.shop/api/equipos/{id}
+  ```
+* **Headers:**
+
+  ```http
+  Accept: application/json
+  ```
+* **Respuesta (200 OK):**
+
+  ```json
+  { "success": true, "data": { "id": 2, "nombre": "Equipo B", "created_at": "2025-02-05T08:22:10Z", "updated_at": "2025-07-01T14:05:12Z" } }
+  ```
+
+### 1.4 Actualizar un equipo
+
+* **Descripción:** Modifica el nombre de un equipo existente.
+* **Método:** `PUT`
+* **Endpoint:**
+
+  ```
+  https://apigestiones.apkfmedekkmewlmewmde.shop/api/equipos/{id}
+  ```
+* **Headers:**
+
+  ```http
+  Content-Type: application/json
+  ```
+* **Body:**
+
+  ```json
+  { "nombre": "Nombre Actualizado" }
+  ```
+* **Respuesta (200 OK):**
+
+  ```json
+  { "success": true, "data": { "id": 2, "nombre": "Nombre Actualizado", "created_at": "2025-02-05T08:22:10Z", "updated_at": "2025-07-30T02:10:00Z" } }
+  ```
+
+### 1.5 Eliminar un equipo
+
+* **Descripción:** Elimina el equipo indicado por su ID.
+* **Método:** `DELETE`
+* **Endpoint:**
+
+  ```
+  https://apigestiones.apkfmedekkmewlmewmde.shop/api/equipos/{id}
+  ```
+* **Headers:**
+
+  ```http
+  Accept: application/json
+  ```
+* **Respuesta (200 OK):**
+
+  ```json
+  { "success": true, "message": "Equipo eliminado correctamente" }
+  ```
+
+---
+
+## 2. Proyectos
+
+> **Nota:** Todas las rutas comienzan con `/api`.
+
+### 2.1 Listar todos los proyectos
+
+* **Método:** `GET`
+* **Endpoint:**
+
+  ```
+  https://apigestiones.apkfmedekkmewlmewmde.shop/api/proyectos
+  ```
+* **Respuesta (200 OK):**
+
+  ```json
+  { "success": true, "data": [ /* array de proyectos */ ] }
+  ```
+
+### 2.2 Listar proyectos de un equipo
+
+* **Método:** `GET`
+* **Endpoint:**
+
+  ```
+  https://apigestiones.apkfmedekkmewlmewmde.shop/api/equipos/{equipo}/proyectos
+  ```
+* **Parámetros:** `{equipo}` – ID del equipo.
+* **Respuesta (200 OK):**
+
+  ```json
+  { "success": true, "equipo_id": <equipo>, "data": [ /* proyectos */ ] }
+  ```
+
+### 2.3 Crear un nuevo proyecto
+
+* **Método:** `POST`
+* **Endpoint:**
+
+  ```
+  https://apigestiones.apkfmedekkmewlmewmde.shop/api/proyectos
+  ```
+* **Headers:**
+
+  ```http
+  Content-Type: application/json
+  ```
+* **Body:**
+
+  ```json
+  { "nombre": "Nombre", "descripcion": "Descripción opcional", "equipo_id": <id_equipo> }
+  ```
+* **Respuesta (201 Created):**
+
+  ```json
+  { "success": true, "data": { /* proyecto creado */ } }
+  ```
+
+### 2.4 Ver un proyecto concreto
+
+* **Método:** `GET`
+* **Endpoint:**
+
+  ```
+  https://apigestiones.apkfmedekkmewlmewmde.shop/api/proyectos/{proyecto}
+  ```
+* **Respuesta (200 OK):**
+
+  ```json
+  { "success": true, "data": { /* proyecto */ } }
+  ```
+
+### 2.5 Actualizar un proyecto
+
+* **Métodos:** `PUT` / `PATCH`
+* **Endpoint:**
+
+  ```
+  https://apigestiones.apkfmedekkmewlmewmde.shop/api/proyectos/{proyecto}
+  ```
+* **Headers:**
+
+  ```http
+  Content-Type: application/json
+  ```
+* **Body (ejemplo):**
+
+  ```json
+  { "nombre": "Nuevo nombre", "descripcion": "Descripción", "equipo_id": <otro_id> }
+  ```
+* **Respuesta (200 OK):**
+
+  ```json
+  { "success": true, "data": { /* proyecto actualizado */ } }
+  ```
+
+### 2.6 Eliminar un proyecto
+
+* **Método:** `DELETE`
+* **Endpoint:**
+
+  ```
+  https://apigestiones.apkfmedekkmewlmewmde.shop/api/proyectos/{proyecto}
+  ```
+* **Respuesta (200 OK):**
+
+  ```json
+  { "success": true, "message": "Proyecto eliminado correctamente" }
+  ```
+
+---
+
+## 3. Usuarios
+
+> **Dominio base:** `https://apigestiones.apkfmedekkmewlmewmde.shop/api`
+
+### 3.1 Listar todos los usuarios
+
+* **Método:** `GET`
+* **Endpoint:**
+
+  ```
+  /usuarios
+  ```
+* **Headers:**
+
+  ```http
+  Content-Type: application/json
+  ```
+* **Respuesta (200 OK):** Array JSON con todos los usuarios.
+
+### 3.2 Ver un usuario por ID
+
+* **Método:** `GET`
+* **Endpoint:**
+
+  ```
+  /usuarios/{id}
+  ```
+* **Headers:** `Content-Type: application/json`
+* **Respuesta (200 OK):** Objeto JSON del usuario.
+
+### 3.3 Crear un nuevo usuario
+
+* **Método:** `POST`
+* **Endpoint:**
+
+  ```
+  /usuarios
+  ```
+* **Headers:** `Content-Type: application/json`
+* **Body:**
+
+  ```json
+  {
+    "nombre": "Juan Pérez",
+    "email": "juan@example.com",
+    "password": "secreto123",
+    "rol": "cliente",
+    "imagen": "https://ejemplo.com/avatar.jpg",
+    "equipo_activo_id": 5
+  }
+  ```
+* **Respuesta (201 Created):** Objeto JSON del usuario creado.
+
+### 3.4 Actualizar un usuario
+
+* **Método:** `PATCH`
+* **Endpoint:**
+
+  ```
+  /usuarios/{id}
+  ```
+* **Headers:** `Content-Type: application/json`
+* **Body (ejemplo):**
+
+  ```json
+  { "nombre": "Juan P.", "email": "juan.p@example.com", "password": "nuevoPass", "rol": "admin", "imagen": null, "equipo_activo_id": 2 }
+  ```
+* **Respuesta (200 OK):** Objeto JSON del usuario actualizado.
+
+### 3.5 Cambiar solo el equipo activo
+
+* **Método:** `PATCH`
+* **Endpoint:**
+
+  ```
+  /usuarios/{id}/equipo-activo
+  ```
+* **Headers:** `Content-Type: application/json`
+* **Body:**
+
+  ```json
+  { "equipo_activo_id": 3 }
+  ```
+* **Respuesta (200 OK):** Usuario con equipo activo actualizado.
+
+### 3.6 Autenticación (login)
+
+* **Método:** `POST`
+* **Endpoint:**
+
+  ```
+  /login
+  ```
+* **Headers:** `Content-Type: application/json`
+* **Body:**
+
+  ```json
+  { "email": "juan@example.com", "password": "secreto123" }
+  ```
+* **Respuesta:**
+
+  * **200 OK:** Usuario autenticado
+  * **401 Unauthorized:** `{ "message": "Credenciales inválidas" }`
+
+---
+
+## 4. Tareas
+
+### 4.1 Listar todas las tareas
+
+* **Método:** `GET`
+* **Endpoint:**
+
+  ```
+  /tareas
+  ```
+* **Respuesta (200 OK):** Array JSON de tareas.
+
+### 4.2 Listar tareas de un proyecto
+
+* **Método:** `GET`
+* **Endpoint:**
+
+  ```
+  /proyectos/{proyecto}/tareas
+  ```
+* **Respuesta (200 OK):** `{ "success": true, "proyecto_id": <proyecto>, "data": [/* tareas */] }`
+
+### 4.3 Ver una tarea concreta
+
+* **Método:** `GET`
+* **Endpoint:**
+
+  ```
+  /tareas/{id}
+  ```
+* **Respuesta (200 OK):** Objeto JSON de la tarea.
+* **Respuesta (404):** Si no existe la tarea.
+
+### 4.4 Crear una nueva tarea
+
+* **Método:** `POST`
+* **Endpoint:**
+
+  ```
+  /tareas
+  ```
+* **Headers:** `Content-Type: application/json`
+* **Body:**
+
+  ```json
+  {
+    "titulo": "Título de la tarea",
+    "programacion_inicio": "2025-07-28",
+    "programacion_fin": "2025-08-05",
+    "prioridad": "alta",
+    "estatus": "pendiente",
+    "proyectos_id": <id_proyecto>
+  }
+  ```
+* **Respuesta (201 Created):** Mensaje y objeto tarea.
+
+### 4.5 Actualizar una tarea
+
+* **Métodos:** `PUT` / `PATCH`
+* **Endpoint:**
+
+  ```
+  /tareas/{id}
+  ```
+* **Body (ejemplo):**
+
+  ```json
+  { "titulo": "Nuevo título", "programacion_inicio": "2025-07-30", "programacion_fin": "2025-08-10", "prioridad": "media", "estatus": "en progreso", "proyectos_id": <otro_id> }
+  ```
+* **Respuesta (200 OK):** Mensaje y objeto tarea actualizado.
+
+### 4.6 Eliminar una tarea
+
+* **Método:** `DELETE`
+* **Endpoint:**
+
+  ```
+  /tareas/{id}
+  ```
+* **Respuesta (204 No Content)**
+
+---
+
+## 5. Asignaciones
+
+### 5.1 Listar todas las asignaciones
+
+* **Método:** `GET`
+* **Endpoint:**
+
+  ```
+  /Asignaciones
+  ```
+* **Respuesta (200 OK):** Array JSON.
+
+### 5.2 Ver una asignación concreta
+
+* **Método:** `GET`
+* **Endpoint:**
+
+  ```
+  /Asignaciones/{id}
+  ```
+* **Respuesta (200 OK):** Objeto JSON.
+
+### 5.3 Crear una asignación
+
+* **Método:** `POST`
+* **Endpoint:**
+
+  ```
+  /Asignaciones
+  ```
+* **Body:**
+
+  ```json
+  { "tareas_id": <id_tarea>, "usuarios_id": <id_usuario> }
+  ```
+* **Respuesta (201 Created):** Objeto asignación.
+
+### 5.4 Actualizar una asignación
+
+* **Métodos:** `PUT` / `PATCH`
+* **Endpoint:**
+
+  ```
+  /Asignaciones/{id}
+  ```
+* **Body:**
+
+  ```json
+  { "tareas_id": <nuevo_id>, "usuarios_id": <nuevo_id> }
+  ```
+* **Respuesta (200 OK):** Objeto asignación actualizado.
+
+### 5.5 Eliminar una asignación
+
+* **Método:** `DELETE`
+* **Endpoint:**
+
+  ```
+  /Asignaciones/{id}
+  ```
+* **Respuesta (204 No Content)**
+
+### 5.6 Obtener tareas de un usuario
+
+* **Método:** `GET`
+* **Endpoint:**
+
+  ```
+  /usuarios/{usuario}/tareas
+  ```
+* **Respuesta (200 OK):** Array JSON de tareas.
+
+### 5.7 Obtener usuarios de una tarea
+
+* **Método:** `GET`
+* **Endpoint:**
+
+  ```
+  /tareas/{tarea}/usuarios
+  ```
+* **Respuesta (200 OK):** Array JSON de usuarios.
+
+---
+
+## 6. Equipo–Usuario
+
+> **Dominio base:** `https://apigestiones.apkfmedekkmewlmewmde.shop/api`
+
+### 6.1 Listar todas las relaciones
+
+* **Método:** `GET`
+* **Endpoint:**
+
+  ```
+  /equipo-usuarios
+  ```
+* **Respuesta (200 OK):** Array de objetos con relaciones.
+
+### 6.2 Ver una relación por ID
+
+* **Método:** `GET`
+* **Endpoint:**
+
+  ```
+  /equipo-usuarios/{id}
+  ```
+* **Respuesta (200 OK):** Objeto JSON con datos anidados.
+
+### 6.3 Crear una nueva relación
+
+* **Método:** `POST`
+* **Endpoint:**
+
+  ```
+  /equipo-usuarios
+  ```
+* **Body:**
+
+  ```json
+  { "usuario_id": 10, "equipo_id": 5, "rol": "admin" }
+  ```
+* **Respuesta (201 Created):** Objeto JSON creado.
+
+### 6.4 Actualizar solo el rol
+
+* **Método:** `PATCH`
+* **Endpoint:**
+
+  ```
+  /equipo-usuarios/{id}
+  ```
+* **Body:**
+
+  ```json
+  { "rol": "cliente" }
+  ```
+* **Respuesta (200 OK):** Objeto JSON actualizado.
+
+### 6.5 Eliminar una relación
+
+* **Método:** `DELETE`
+* **Endpoint:**
+
+  ```
+  /equipo-usuarios/{id}
+  ```
+* **Respuesta (200 OK):** `{ "message": "Asignación eliminada correctamente." }`
+
+### 6.6 Obtener usuarios de un equipo
+
+* **Método:** `GET`
+* **Endpoint:**
+
+  ```
+  /equipos/{equipo}/usuarios
+  ```
+* **Respuesta (200 OK):** Array JSON de usuarios.
+
+### 6.7 Obtener equipos de un usuario
+
+* **Método:** `GET`
+* **Endpoint:**
+
+  ```
+  /usuarios/{usuario}/equipos
+  ```
+* **Respuesta (200 OK):** Array JSON de equipos.
+
+---
+
+> **Importante:** Para todas las solicitudes con cuerpo (POST, PUT, PATCH), incluye siempre el encabezado `Content-Type: application/json`.
+> En las rutas que devuelven recursos, sigue la estructura estándar:
+>
+> ```json
+> { "success": true, "data": … }
+> ```
+
 
 1. **Clonar el repositorio**  
    ```bash
