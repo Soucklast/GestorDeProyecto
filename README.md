@@ -223,6 +223,7 @@ El calendario muestra una vista mensual con las tareas asignadas:
     ]
   }
   ```
+<img width="1733" height="866" alt="image" src="https://github.com/user-attachments/assets/c48df01a-fb4d-41f9-b350-4dab6c01556f" />
 
 ### 1.2 Crear un equipo
 
@@ -251,6 +252,7 @@ El calendario muestra una vista mensual con las tareas asignadas:
     "data": { "id": 3, "nombre": "Mi Equipo Nuevo", "created_at": "2025-07-30T02:00:00Z", "updated_at": "2025-07-30T02:00:00Z" }
   }
   ```
+<img width="1743" height="675" alt="image" src="https://github.com/user-attachments/assets/54329627-aae1-44ae-91b1-2a724f99d0af" />
 
 ### 1.3 Ver un equipo
 
@@ -271,6 +273,8 @@ El calendario muestra una vista mensual con las tareas asignadas:
   ```json
   { "success": true, "data": { "id": 2, "nombre": "Equipo B", "created_at": "2025-02-05T08:22:10Z", "updated_at": "2025-07-01T14:05:12Z" } }
   ```
+
+<img width="1752" height="786" alt="image" src="https://github.com/user-attachments/assets/517752ed-85eb-49d2-a87d-171500e78f5a" />
 
 ### 1.4 Actualizar un equipo
 
@@ -296,6 +300,7 @@ El calendario muestra una vista mensual con las tareas asignadas:
   ```json
   { "success": true, "data": { "id": 2, "nombre": "Nombre Actualizado", "created_at": "2025-02-05T08:22:10Z", "updated_at": "2025-07-30T02:10:00Z" } }
   ```
+<img width="1736" height="737" alt="image" src="https://github.com/user-attachments/assets/a761a982-5495-49dc-bacf-1c806d55a900" />
 
 ### 1.5 Eliminar un equipo
 
@@ -316,6 +321,7 @@ El calendario muestra una vista mensual con las tareas asignadas:
   ```json
   { "success": true, "message": "Equipo eliminado correctamente" }
   ```
+<img width="1740" height="661" alt="image" src="https://github.com/user-attachments/assets/327aec56-2b4b-48cb-b46f-9cb97b689219" />
 
 ---
 
@@ -336,6 +342,7 @@ El calendario muestra una vista mensual con las tareas asignadas:
   ```json
   { "success": true, "data": [ /* array de proyectos */ ] }
   ```
+<img width="1742" height="893" alt="image" src="https://github.com/user-attachments/assets/f3af9dd0-7834-4a0d-8a57-93f241c63b21" />
 
 ### 2.2 Listar proyectos de un equipo
 
@@ -351,6 +358,7 @@ El calendario muestra una vista mensual con las tareas asignadas:
   ```json
   { "success": true, "equipo_id": <equipo>, "data": [ /* proyectos */ ] }
   ```
+<img width="1753" height="827" alt="image" src="https://github.com/user-attachments/assets/d8bcfb61-4c25-4aef-b03a-f4ba3df117ac" />
 
 ### 2.3 Crear un nuevo proyecto
 
