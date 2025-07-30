@@ -441,6 +441,7 @@ El calendario muestra una vista mensual con las tareas asignadas:
   ```
 
 ---
+<img width="1761" height="586" alt="image" src="https://github.com/user-attachments/assets/6564852d-257d-4516-b736-7a8a0591394e" />
 
 ## 3. Usuarios
 
@@ -461,6 +462,9 @@ El calendario muestra una vista mensual con las tareas asignadas:
   ```
 * **Respuesta (200 OK):** Array JSON con todos los usuarios.
 
+<img width="1706" height="851" alt="image" src="https://github.com/user-attachments/assets/08dc01ec-b57a-43d6-b590-aa10a053cb5c" />
+
+
 ### 3.2 Ver un usuario por ID
 
 * **Método:** `GET`
@@ -472,11 +476,13 @@ El calendario muestra una vista mensual con las tareas asignadas:
 * **Headers:** `Content-Type: application/json`
 * **Respuesta (200 OK):** Objeto JSON del usuario.
 
+  <img width="1753" height="862" alt="image" src="https://github.com/user-attachments/assets/8c009a81-92ba-432f-b308-9785ba239d37" />
+
+
 ### 3.3 Crear un nuevo usuario
 
 * **Método:** `POST`
 * **Endpoint:**
-
   ```
   /usuarios
   ```
@@ -494,6 +500,9 @@ El calendario muestra una vista mensual con las tareas asignadas:
   }
   ```
 * **Respuesta (201 Created):** Objeto JSON del usuario creado.
+
+<img width="1738" height="817" alt="image" src="https://github.com/user-attachments/assets/bd24b0e3-9ae6-4663-bb0d-a15b78801981" />
+
 
 ### 3.4 Actualizar un usuario
 
