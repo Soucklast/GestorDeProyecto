@@ -383,6 +383,8 @@ El calendario muestra una vista mensual con las tareas asignadas:
   ```json
   { "success": true, "data": { /* proyecto creado */ } }
   ```
+<img width="1763" height="881" alt="image" src="https://github.com/user-attachments/assets/58fee734-e3c3-4e2e-9b05-998b57937ba6" />
+
 
 ### 2.4 Ver un proyecto concreto
 
@@ -397,6 +399,7 @@ El calendario muestra una vista mensual con las tareas asignadas:
   ```json
   { "success": true, "data": { /* proyecto */ } }
   ```
+<img width="1768" height="869" alt="image" src="https://github.com/user-attachments/assets/9d6b363a-40d6-4689-8355-adddc534045a" />
 
 ### 2.5 Actualizar un proyecto
 
@@ -421,6 +424,7 @@ El calendario muestra una vista mensual con las tareas asignadas:
   ```json
   { "success": true, "data": { /* proyecto actualizado */ } }
   ```
+<img width="1903" height="944" alt="image" src="https://github.com/user-attachments/assets/54986303-8789-4182-9b66-c4fad7e0e839" />
 
 ### 2.6 Eliminar un proyecto
 
