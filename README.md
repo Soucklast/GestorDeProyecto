@@ -61,6 +61,8 @@ En el área central, se muestra una tabla interactiva que te permite gestionar e
 * **Eliminar** elementos que ya no sean necesarios.
 * **Filtrar y ordenar** por nombre, fecha de entrega, estado o prioridad para enfocarte en lo más urgente.
 
+
+
 <img width="1280" height="356" alt="image" src="https://github.com/user-attachments/assets/07e1d8b1-9f1a-4f28-a2f8-94c448d5301e" />
 
 
@@ -73,7 +75,7 @@ En el área central, se muestra una tabla interactiva que te permite gestionar e
   * Ver el rol de cada miembro (Desarrollador, Gestor, Revisor, etc.).
   * Hacer clic sobre un usuario para ver su historial de tareas y proyectos asignados.
 
-![Panel lateral izquierdo](https://github.com/user-attachments/assets/0899569d-4d66-4c6a-854d-5fd5aac118dd)
+
 
 
 
