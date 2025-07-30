@@ -83,6 +83,9 @@ Project Manager es una plataforma web diseñada para la gestión integral de pro
 
 Para iniciar sesión en **Project Manager**, ingresa tu correo electrónico y contraseña en el formulario de acceso. El sistema validará automáticamente tus credenciales.
 
+<img width="1919" height="912" alt="image" src="https://github.com/user-attachments/assets/33dbf812-ee63-4352-a0e1-4a5729c754f5" />
+
+
 ### 2. Registro de Usuario
 
 Completa el formulario con tu nombre, correo y contraseña. Al registrarte, se asignará un rol dinámico según el equipo activo seleccionado.
