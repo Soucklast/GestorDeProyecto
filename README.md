@@ -107,20 +107,23 @@ Al registrarse en el sistema, cada usuario recibe un rol que se asigna en funci�
 
 ## Panel de Proyectos
 
-En la sección **Proyectos** encontrarás un tablero donde puedes:
+En la sección **Proyectos** encontrarás un tablero donde puedes(es necesario tener un equipo asignado en seccion de equipos):
 
 * **Crear** nuevos proyectos con nombre y descripción.
 * **Visualizar** la lista de proyectos activos e inactivos.
 * **Editar** los detalles básicos (nombre, descripción).
 * **Eliminar** proyectos ya finalizados o cancelados.
 
-> **Nota:** Aquí no se detallan los campos internos de comunicación ni workflow específico.
+<img width="1906" height="865" alt="image" src="https://github.com/user-attachments/assets/cdc30ff7-2833-4da3-b9f6-ecb25ca46959" />
+<img width="1918" height="827" alt="image" src="https://github.com/user-attachments/assets/8626b57e-dd0b-4d4e-93fa-5f48bbbb92c3" />
+<img width="1916" height="880" alt="image" src="https://github.com/user-attachments/assets/76fb2989-03fd-4d96-9fa5-0809a50e94c1" />
+<img width="1916" height="881" alt="image" src="https://github.com/user-attachments/assets/a6e78bd3-a5bb-493f-b442-8d4fdaba8e79" />
 
 ---
 
 ## Panel de Tareas
 
-El panel **Tareas** funciona como un CRUD ligero con los siguientes atributos:
+El panel **Tareas** funciona como un CRUD ligero con los siguientes atributos se tiene que escoger un proyecto y en este podras agregar lo siguiente:
 
 * **Nombre:** Identificador corto de la tarea.
 * **Fecha Inicio y Fecha Fin:** Rango de ejecución aproximado.
@@ -131,19 +134,17 @@ El panel **Tareas** funciona como un CRUD ligero con los siguientes atributos:
 Acciones disponibles:
 
 1. **Crear:** Rellenas los campos sin validación de flujo.
-2. **Listar:** Filtrado básico por estatus o prioridad.
 3. **Actualizar:** Cambia cualquiera de los atributos.
 4. **Eliminar:** Remueve la tarea del listado.
+<img width="1433" height="780" alt="image" src="https://github.com/user-attachments/assets/f4bc61ca-aed0-42b9-86fb-545234d0f43e" />
 
 ---
 
 ## Sección de Perfil
 
-Tu sección **Perfil** muestra información mínima:
+Tu sección **Perfil** muestra información del usurio y podras cerrar sesion.
 
-* Nombre completo y correo.
-* Último acceso.
-* Rol dinámico según equipo activo.
+<img width="1908" height="879" alt="image" src="https://github.com/user-attachments/assets/45479552-f369-4e5a-95f7-6d11c4b99bc5" />
 
 >
 
@@ -157,6 +158,7 @@ En **Equipos** puedes gestionar la lista de equipos y definir tu equipo activo:
 * **Seleccionar Equipo Activo:** Botón para marcar el equipo principal.
 * El rol se actualiza según la configuración del equipo activo.
 
+<img width="1912" height="883" alt="image" src="https://github.com/user-attachments/assets/724ba454-4cdc-48ec-b7b5-ca05a26ce130" />
 
 ---
 
@@ -169,9 +171,10 @@ El calendario muestra una vista mensual con las tareas asignadas:
 * **Filtro por equipo:** Muestra solo tareas del equipo activo.
 
 
----
+<img width="1893" height="897" alt="image" src="https://github.com/user-attachments/assets/7054d9da-6b36-46e8-bbf5-0d13cc03c42f" />
 
-*Este README es una guía rápida y algo críptica para usuarios que conocen la plataforma, dejando espacios a interpretación.*
+
+---
 
 
 **# Laravel API Documentation**
