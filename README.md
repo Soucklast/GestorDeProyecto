@@ -6,16 +6,15 @@
 
 ## Integrantes
 
-- **José Axel Vera Ortiz** – Desarrollador Full‑Stack y Coordinador de Equipo  
-- **Arisaí López Martínez** – Diseñadora de Interfaz y Gestora de Calidad  
+- **José Axel Vera Ortiz** - Back end  
+- **Arisaí López Martínez** – Front end
 
 ---
 
 ## ¿Qué hace el sistema?
 
 Project Manager es una plataforma web diseñada para la gestión integral de proyectos y sus tareas asociadas.  
-Permite a los equipos organizar flujos de trabajo, asignar responsabilidades, establecer fechas límite y hacer seguimiento del avance en tiempo real.  
-Ofrece informes detallados, visualizaciones de progreso y notificaciones automáticas para asegurar que cada entregable se complete según lo previsto.
+Permite a los equipos organizar flujos de trabajo, asignar responsabilidades, establecer fechas límite y hacer seguimiento del avance en tiempo real. 
 
 ---
 
@@ -23,29 +22,21 @@ Ofrece informes detallados, visualizaciones de progreso y notificaciones automá
 
 1. **Gestión de Proyectos**  
    - Creación, edición y eliminación de proyectos.  
-   - Cronogramas y diagramas de Gantt interactivos.  
 2. **Control de Tareas**  
    - Asignación de tareas a miembros del equipo con fechas de entrega.  
-   - Estado de tarea (Pendiente, En Progreso, Completada).  
 3. **Colaboración en Equipo**  
    - Comentarios y archivos adjuntos por tarea.  
-   - Notificaciones por correo y dentro de la plataforma.  
-4. **Reportes y Métricas**  
-   - Tableros de indicadores (KPIs) de rendimiento.  
-   - Exportación de reportes en PDF y CSV.  
-5. **Roles y Permisos**  
-   - Control de acceso diferenciado (Administrador, Gestor, Colaborador).  
+4. **Roles y Permisos**  
+   - Control de acceso diferenciado (Administrador, Cliente).  
    - Gestión de perfiles y permisos por función.
 
 ## Requisitos Previos
 
 - [Node.js](https://nodejs.org/) v14+  
 - [Angular CLI](https://angular.io/cli)  
-- [PostgreSQL](https://www.postgresql.org/)  
+- [Mysqul](https://www.postgresql.org/)
+- laravel 12  
 - Cuenta de GitHub para clonar el repositorio  
-
----
-¡Entendido! Aquí tienes solo la sección que me pediste, con el formato adecuado para tu `README.md`:
 
 ---
 
@@ -70,10 +61,13 @@ En el área central, se muestra una tabla interactiva que te permite gestionar e
 * **Eliminar** elementos que ya no sean necesarios.
 * **Filtrar y ordenar** por nombre, fecha de entrega, estado o prioridad para enfocarte en lo más urgente.
 
+<img width="1280" height="356" alt="image" src="https://github.com/user-attachments/assets/07e1d8b1-9f1a-4f28-a2f8-94c448d5301e" />
+
+
 #### **Panel Lateral Izquierdo**
 
 * **Perfil**: Aquí verás tu foto de usuario, nombre y rol. También tienes acceso rápido a la configuración de tu cuenta (cambiar contraseña, actualizar información personal, etc.).
-* **Usuarios del Equipo**: Debajo del perfil, aparece una lista de los integrantes de tu equipo. Desde este panel puedes:
+* **Equipo**: Debajo del perfil, aparece una lista de los integrantes de tu equipo. Desde este panel puedes:
 
   * Consultar rápidamente quién está activo.
   * Ver el rol de cada miembro (Desarrollador, Gestor, Revisor, etc.).
