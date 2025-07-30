@@ -90,6 +90,8 @@ Para iniciar sesión en **Project Manager**, ingresa tu correo electrónico y co
 
 Completa el formulario con tu nombre, correo y contraseña. Al registrarte, se asignará un rol dinámico según el equipo activo seleccionado.
 
+<img width="1917" height="898" alt="image" src="https://github.com/user-attachments/assets/ee64c0d5-5dca-4bad-add8-2101e4fc784e" />
+
 ---
 
 ## Niveles de Usuario y Roles
