@@ -9,9 +9,9 @@
         <mat-icon>folder</mat-icon>
         <span>Proyectos</span>
       </button>
-      <button [class.active]="vista === 'usuarios'" (click)="cambiarVista('usuarios')">
-        <mat-icon>group</mat-icon>
-        <span>Usuarios</span>
+      <button [class.active]="vista === 'equipos'" (click)="cambiarVista('equipos')">
+        <mat-icon>groups</mat-icon>
+        <span>Equipos</span>
       </button>
       <button [class.active]="vista === 'calendario'" (click)="cambiarVista('calendario')">
         <mat-icon>calendar_month</mat-icon>
@@ -24,7 +24,7 @@
     <section class="inicio-contenido">
       <app-perfil *ngIf="vista === 'perfil'"></app-perfil>
       <app-componente-proyectos *ngIf="vista === 'proyectos'"></app-componente-proyectos>
-      <app-admin-usuarios *ngIf="vista === 'usuarios'"></app-admin-usuarios>
+      <app-admin-usuarios *ngIf="vista === 'equipos'"></app-admin-usuarios>
       <app-componente-calendario *ngIf="vista === 'calendario'"></app-componente-calendario>
     </section>
   </main>

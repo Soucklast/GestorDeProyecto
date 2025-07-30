@@ -1,45 +1,94 @@
 <div class="admin-usuarios-container">
-  <h2>Equipos en los que participas</h2>
-  <div *ngIf="loadingEquipos" class="equipos-loading">Cargando equipos...</div>
-  <div *ngIf="errorEquipos" class="equipos-error">{{ errorEquipos }}</div>
-  <table *ngIf="!loadingEquipos && !errorEquipos && equipos.length > 0" class="equipos-table">
+  <h2>Equipos</h2>
+  <button class="crear-equipo-btn" (click)="abrirDialogoCrearEquipo()">Agregar equipo</button>
+  <div *ngIf="loading" class="equipos-loading">Cargando equipos...</div>
+  <div *ngIf="error" class="equipos-error">{{ error }}</div>
+  <table *ngIf="!loading && !error && equiposUsuario.length > 0" class="equipos-table">
     <thead>
       <tr>
-        <th>ID</th>
-        <th>Nombre</th>
+        <th>Nombre del equipo</th>
         <th>Integrantes</th>
-        <th>Fecha de creación</th>
+        <th>Acciones</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let equipo of equipos">
-        <td>{{ equipo.id }}</td>
+      <tr *ngFor="let equipo of equiposUsuario" [class.equipo-activo]="equipo.id == equipoActivoId">
         <td>{{ equipo.nombre }}</td>
         <td>
-          <span *ngIf="equipo.integrantes && equipo.integrantes.length > 0; else sinIntegrantes">
-            <span *ngFor="let user of equipo.integrantes; let last = last">
+          <span *ngIf="equipo.usuarios && equipo.usuarios.length > 0; else sinIntegrantes">
+            <span *ngFor="let user of equipo.usuarios; let last = last">
               {{ user.nombre }}<span *ngIf="!last">, </span>
             </span>
           </span>
           <ng-template #sinIntegrantes>
             <span style="color:#b39ddb">Sin integrantes</span>
           </ng-template>
-          <div style="margin-top:8px">
-            <select [(ngModel)]="usuarioAAgregar[equipo.id]" aria-label="Agregar usuario al equipo">
-              <option value="" disabled>Agregar usuario...</option>
-              <option *ngFor="let user of getUsuariosNoIntegrantes(equipo)" [value]="user.id">{{ user.nombre }}</option>
-            </select>
-            <button type="button" (click)="agregarUsuarioAEquipo(equipo)" [disabled]="!usuarioAAgregar[equipo.id] || agregandoUsuario[equipo.id]" style="margin-left:6px; background:#7e57c2; color:#fff; border:none; border-radius:4px; padding:4px 12px; cursor:pointer;">
-              <span *ngIf="!agregandoUsuario[equipo.id]">Agregar</span>
-              <span *ngIf="agregandoUsuario[equipo.id]">...</span>
-            </button>
-          </div>
         </td>
-        <td>{{ equipo.created_at | date:'short' }}</td>
+        <td>
+          <ng-container *ngIf="getRolEnEquipo(equipo.id) !== 'cliente'">
+            <button mat-icon-button color="primary" (click)="abrirDialogoEditarEquipo(equipo)" title="Editar equipo">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="eliminarEquipo(equipo)" title="Eliminar equipo">
+              <mat-icon>delete</mat-icon>
+            </button>
+            <button mat-icon-button color="accent" (click)="cambiarEquipoActivo(equipo.id)" [disabled]="equipo.id == equipoActivoId" title="Seleccionar este equipo como activo">
+              <mat-icon>{{ equipo.id == equipoActivoId ? 'check_circle' : 'radio_button_unchecked' }}</mat-icon>
+            </button>
+          </ng-container>
+          <ng-container *ngIf="getRolEnEquipo(equipo.id) === 'cliente'">
+            <button mat-icon-button color="accent" (click)="cambiarEquipoActivo(equipo.id)" [disabled]="equipo.id == equipoActivoId" title="Seleccionar este equipo como activo">
+              <mat-icon>{{ equipo.id == equipoActivoId ? 'check_circle' : 'radio_button_unchecked' }}</mat-icon>
+            </button>
+          </ng-container>
+        </td>
       </tr>
+  <!-- Diálogo para editar equipo -->
+  <div class="dialog-overlay" *ngIf="showEditarEquipo">
+    <div class="dialog">
+      <h3>Editar equipo</h3>
+      <label>Nombre del equipo:</label>
+      <input [(ngModel)]="nuevoEquipoNombre" placeholder="Nombre del equipo" />
+      <label>Selecciona integrantes:</label>
+      <mat-form-field appearance="fill" style="width:100%">
+        <mat-select [(ngModel)]="usuariosSeleccionados" multiple placeholder="Selecciona usuarios">
+          <mat-option *ngFor="let user of allUsuarios" [value]="user.id">{{ user.nombre }} ({{ user.email }})</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div class="dialog-actions">
+        <button (click)="cerrarDialogoEquipo()" [disabled]="editandoEquipo">Cancelar</button>
+        <button (click)="guardarEdicionEquipo()" [disabled]="editandoEquipo">
+          <span *ngIf="!editandoEquipo">Guardar</span>
+          <span *ngIf="editandoEquipo">Guardando...</span>
+        </button>
+      </div>
+    </div>
+  </div>
     </tbody>
   </table>
-  <div *ngIf="!loadingEquipos && !errorEquipos && equipos.length === 0">
+  <div *ngIf="!loading && !error && equiposUsuario.length === 0">
     No participas en ningún equipo.
+  </div>
+
+  <!-- Diálogo para crear equipo -->
+  <div class="dialog-overlay" *ngIf="showCrearEquipo">
+    <div class="dialog">
+      <h3>Crear nuevo equipo</h3>
+      <label>Nombre del equipo:</label>
+      <input [(ngModel)]="nuevoEquipoNombre" placeholder="Nombre del equipo" />
+      <label>Selecciona integrantes:</label>
+      <mat-form-field appearance="fill" style="width:100%">
+        <mat-select [(ngModel)]="usuariosSeleccionados" multiple placeholder="Selecciona usuarios">
+          <mat-option *ngFor="let user of allUsuarios" [value]="user.id">{{ user.nombre }} ({{ user.email }})</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div class="dialog-actions">
+        <button (click)="cerrarDialogoCrearEquipo()" [disabled]="creandoEquipo">Cancelar</button>
+        <button (click)="crearEquipo()" [disabled]="creandoEquipo">
+          <span *ngIf="!creandoEquipo">Crear</span>
+          <span *ngIf="creandoEquipo">Creando...</span>
+        </button>
+      </div>
+    </div>
   </div>
 </div>

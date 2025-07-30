@@ -1,57 +1,18 @@
 <!-- componente-proyectos.html -->
 <div class="ui-main-center">
-    <!-- Top Panel -->
-    <div class="ui-top-panel">
-        <mat-toolbar class="project-header">
-            <div class="left">
-                <mat-icon class="gd-ui-project-icon">folder</mat-icon>
-                <div class="ui5-title-app-name">Nombre del Proyecto</div>
-                <button mat-icon-button>
-                    <mat-icon>target</mat-icon>
-                </button>
-            </div>
-
-            <div class="quick-controls">
-                <div class="ui5-sharing">
-                    <mat-icon>people</mat-icon>
-                </div>
-                <button mat-icon-button>
-                    <mat-icon>push_pin</mat-icon>
-                </button>
-            </div>
-        </mat-toolbar>
-
-        <!-- Navigation Tabs -->
-        <div class="ui5-hmenu">
-            <div *ngFor="let view of views"
-                [class.selected]="(view === 'Table' && activeView === 'table') || (view === 'Calendar' && activeView === 'calendar')"
-                class="item" (click)="setView(view)">
-                <div class="label">{{ view }}</div>
-            </div>
-
-        </div>
-    </div>
-
-    <!-- Content Area -->
+    <!-- Solo la vista de tabla y controles esenciales -->
     <div class="ui-content-center">
-        <!-- Toolbar de controles -->
-        <div class="ui5-app-controls">
-            <div class="left">
-                <!-- Controles izquierda -->
-            </div>
-            <div class="right">
-                <!-- Controles derecha -->
-            </div>
-        </div>
-
+        <!-- Toolbar de controles (puedes dejar solo lo necesario aquí) -->
+        <div class="ui5-app-controls"></div>
         <!-- Vista de Tabla -->
-        <div *ngIf="activeView === 'table'" class="main">
+        <div class="main">
             <!-- Lista de proyectos -->
             <mat-card class="project-list-card">
                 <!-- Depuración: mostrar el array de proyectos en crudo -->
                 <mat-card-title>
                   Proyectos
-                  <button mat-mini-fab color="primary" (click)="abrirDialogoProyecto()" style="float:right; margin-top:-8px;">
+                  <!-- Botón agregar proyecto solo si no es cliente -->
+                  <button *ngIf="userRol !== 'cliente'" mat-mini-fab color="primary" (click)="abrirDialogoProyecto()" style="float:right; margin-top:-8px;">
                     <mat-icon>add</mat-icon>
                   </button>
                 </mat-card-title>
@@ -64,10 +25,11 @@
                             <div class="project-desc">{{ proyecto.descripcion }}</div>
                           </div>
                           <span class="spacer"></span>
-                          <button mat-icon-button color="primary" (click)="abrirDialogoEditarProyecto(proyecto, $event)">
+                          <!-- Botones editar/eliminar proyecto solo si no es cliente -->
+                          <button *ngIf="userRol !== 'cliente'" mat-icon-button color="primary" (click)="abrirDialogoEditarProyecto(proyecto, $event)">
                             <mat-icon>edit</mat-icon>
                           </button>
-                          <button mat-icon-button color="warn" (click)="eliminarProyecto(proyecto, $event)">
+                          <button *ngIf="userRol !== 'cliente'" mat-icon-button color="warn" (click)="eliminarProyecto(proyecto, $event)">
                             <mat-icon>delete</mat-icon>
                           </button>
                         </div>
@@ -81,25 +43,14 @@
                     <input matInput [(ngModel)]="proyectoEditando.nombre" name="nombreEditar" required>
                   </mat-form-field>
                   <mat-form-field appearance="fill" style="width:100%">
-                    
-                  </mat-form-field>
-                  <mat-form-field appearance="fill" style="width:100%">
-                    <mat-label>Fecha de inicio</mat-label>
-                    <input matInput [matDatepicker]="pickerInicioEdit" [(ngModel)]="proyectoEditando.fechaInicio" name="fechaInicioEditar" required>
-                    <mat-datepicker-toggle matSuffix [for]="pickerInicioEdit"></mat-datepicker-toggle>
-                    <mat-datepicker #pickerInicioEdit></mat-datepicker>
-                  </mat-form-field>
-                  <mat-form-field appearance="fill" style="width:100%">
-                    <mat-label>Fecha de fin</mat-label>
-                    <input matInput [matDatepicker]="pickerFinEdit" [(ngModel)]="proyectoEditando.fechaFin" name="fechaFinEditar" required>
-                    <mat-datepicker-toggle matSuffix [for]="pickerFinEdit"></mat-datepicker-toggle>
-                    <mat-datepicker #pickerFinEdit></mat-datepicker>
+                    <mat-label>Descripción</mat-label>
+                    <textarea matInput [(ngModel)]="proyectoEditando.descripcion" name="descripcionEditar" required></textarea>
                   </mat-form-field>
                 </form>
               </mat-dialog-content>
               <mat-dialog-actions align="end">
                 <button mat-button mat-dialog-close>Cancelar</button>
-                <button mat-raised-button color="primary" (click)="guardarEdicionProyecto()" [disabled]="!proyectoEditando.nombre || !proyectoEditando.integrantes.length || !proyectoEditando.fechaInicio || !proyectoEditando.fechaFin">Guardar</button>
+                <button mat-raised-button color="primary" (click)="guardarEdicionProyecto()" [disabled]="!proyectoEditando.nombre || !proyectoEditando.descripcion">Guardar</button>
               </mat-dialog-actions>
             </ng-template>
                     </mat-list-item>
@@ -140,7 +91,7 @@
       <mat-form-field appearance="fill" style="width:100%">
         <mat-label>Asignar a</mat-label>
         <mat-select [(ngModel)]="tareaEditando.usuarios_id" name="usuarios_idEditar" required>
-          <mat-option *ngFor="let user of users" [value]="user.id">{{ user.nombre }}</mat-option>
+          <mat-option *ngFor="let user of usersEquipo" [value]="user.id">{{ user.nombre }}</mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field appearance="fill" style="width:100%">
@@ -190,7 +141,7 @@
       <mat-form-field appearance="fill" style="width:100%">
         <mat-label>Asignar a</mat-label>
         <mat-select [(ngModel)]="nuevaTarea.usuarios_id" name="usuarios_id" required>
-          <mat-option *ngFor="let user of users" [value]="user.id">{{ user.nombre }}</mat-option>
+          <mat-option *ngFor="let user of usersEquipo" [value]="user.id">{{ user.nombre }}</mat-option>
         </mat-select>
       </mat-form-field>
     </form>
@@ -209,28 +160,14 @@
                     <input matInput [(ngModel)]="nuevoProyecto.nombre" name="nombre" required>
                   </mat-form-field>
                   <mat-form-field appearance="fill" style="width:100%">
-                    <mat-label>Integrantes</mat-label>
-                    <mat-select [(ngModel)]="nuevoProyecto.integrantes" name="integrantes" multiple required>
-                      <mat-option *ngFor="let user of users" [value]="user">{{ user }}</mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                  <mat-form-field appearance="fill" style="width:100%">
-                    <mat-label>Fecha de inicio</mat-label>
-                    <input matInput [matDatepicker]="pickerInicio" [(ngModel)]="nuevoProyecto.fechaInicio" name="fechaInicio" required>
-                    <mat-datepicker-toggle matSuffix [for]="pickerInicio"></mat-datepicker-toggle>
-                    <mat-datepicker #pickerInicio></mat-datepicker>
-                  </mat-form-field>
-                  <mat-form-field appearance="fill" style="width:100%">
-                    <mat-label>Fecha de fin</mat-label>
-                    <input matInput [matDatepicker]="pickerFin" [(ngModel)]="nuevoProyecto.fechaFin" name="fechaFin" required>
-                    <mat-datepicker-toggle matSuffix [for]="pickerFin"></mat-datepicker-toggle>
-                    <mat-datepicker #pickerFin></mat-datepicker>
+                    <mat-label>Descripción</mat-label>
+                    <textarea matInput [(ngModel)]="nuevoProyecto.descripcion" name="descripcion" required></textarea>
                   </mat-form-field>
                 </form>
               </mat-dialog-content>
               <mat-dialog-actions align="end">
                 <button mat-button mat-dialog-close>Cancelar</button>
-                <button mat-raised-button color="primary" (click)="agregarProyecto()" [disabled]="!nuevoProyecto.nombre || !nuevoProyecto.integrantes.length || !nuevoProyecto.fechaInicio || !nuevoProyecto.fechaFin">Agregar</button>
+                <button mat-raised-button color="primary" (click)="agregarProyecto()" [disabled]="!nuevoProyecto.nombre || !nuevoProyecto.descripcion">Agregar</button>
               </mat-dialog-actions>
             </ng-template>
             <!-- Tareas del proyecto seleccionado -->
@@ -243,6 +180,12 @@
                     <ng-container matColumnDef="title">
                         <th mat-header-cell *matHeaderCellDef>Título</th>
                         <td mat-cell *matCellDef="let row">{{ row.title }}</td>
+                    </ng-container>
+
+                    <!-- Asignado a Column -->
+                    <ng-container matColumnDef="asignadoA">
+                        <th mat-header-cell *matHeaderCellDef>Asignado a</th>
+                        <td mat-cell *matCellDef="let row">{{ row.asignadoA || '-' }}</td>
                     </ng-container>
 
                     <!-- Priority Column (solo lectura) -->
@@ -261,24 +204,23 @@
                     <ng-container matColumnDef="actions">
                         <th mat-header-cell *matHeaderCellDef>Acciones</th>
                         <td mat-cell *matCellDef="let row">
-                            <button mat-icon-button color="primary" (click)="abrirDialogoEditarTarea(row)">
+                            <!-- Botón agregar tarea solo si no es cliente -->
+                            <button *ngIf="userRol !== 'cliente'" mat-raised-button color="primary" (click)="abrirDialogoCrearTarea()">
+                                <mat-icon>add</mat-icon>
+                                Agregar Tarea
+                            </button>
+                            <button *ngIf="userRol !== 'cliente'" mat-icon-button color="primary" (click)="abrirDialogoEditarTarea(row)">
                                 <mat-icon>edit</mat-icon>
                             </button>
-                            <button mat-icon-button color="warn" (click)="deleteRow(row)">
+                            <button *ngIf="userRol !== 'cliente'" mat-icon-button color="warn" (click)="deleteRow(row)">
                                 <mat-icon>delete</mat-icon>
                             </button>
                         </td>
                     </ng-container>
 
-                    <tr mat-header-row *matHeaderRowDef="['title','priority','status','actions']"></tr>
-                    <tr mat-row *matRowDef="let row; columns: ['title','priority','status','actions'];" cdkDrag></tr>
+                    <tr mat-header-row *matHeaderRowDef="['title','asignadoA','priority','status','actions']"></tr>
+                    <tr mat-row *matRowDef="let row; columns: ['title','asignadoA','priority','status','actions'];" cdkDrag></tr>
                 </table>
-                <div class="left margen-arriba">
-                    <button mat-raised-button color="primary" (click)="abrirDialogoCrearTarea()">
-                        <mat-icon>add</mat-icon>
-                        Agregar Tarea
-                    </button>
-                </div>
                 </div>
             </div>
         </div>
@@ -300,27 +242,44 @@
 </div>
 
 <!-- Date Range Dialog -->
-<ng-template #dateRangeDialog>
-    <div class="date-range-dialog">
-        <h2>Seleccionar rango de fechas</h2>
-        <div class="date-pickers">
-            <mat-form-field>
-                <mat-label>Fecha inicio</mat-label>
-                <input matInput [matDatepicker]="startPicker" [(ngModel)]="tempStartDate">
-                <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
-                <mat-datepicker #startPicker></mat-datepicker>
-            </mat-form-field>
-
-            <mat-form-field>
-                <mat-label>Fecha fin</mat-label>
-                <input matInput [matDatepicker]="endPicker" [(ngModel)]="tempEndDate">
-                <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
-                <mat-datepicker #endPicker></mat-datepicker>
-            </mat-form-field>
-        </div>
-        <div class="dialog-actions">
-            <button mat-button (click)="dialogRef.close()">Cancelar</button>
-            <button mat-button color="primary" (click)="saveDateRange()">Guardar</button>
-        </div>
-    </div>
-</ng-template>
+            <ng-template #dialogoCrearTarea>
+              <h2 mat-dialog-title>Crear Tarea</h2>
+              <mat-dialog-content>
+                <form #formCrearTarea="ngForm">
+                  <mat-form-field appearance="fill" style="width:100%">
+                    <mat-label>Título</mat-label>
+                    <input matInput [(ngModel)]="nuevaTarea.titulo" name="tituloCrear" required>
+                  </mat-form-field>
+                  <mat-form-field appearance="fill" style="width:100%">
+                    <mat-label>Usuario</mat-label>
+                    <mat-select [(ngModel)]="nuevaTarea.usuarios_id" name="usuarios_idCrear" required>
+                      <mat-option *ngFor="let user of usersEquipo" [value]="user.id">{{ user.nombre }}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <mat-form-field appearance="fill" style="width:100%">
+                    <mat-label>Fecha de inicio</mat-label>
+                    <input matInput [matDatepicker]="pickerInicio" [(ngModel)]="nuevaTarea.programacion_inicio" name="programacion_inicioCrear" required>
+                    <mat-datepicker-toggle matSuffix [for]="pickerInicio"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerInicio></mat-datepicker>
+                  </mat-form-field>
+                  <mat-form-field appearance="fill" style="width:100%">
+                    <mat-label>Fecha de fin</mat-label>
+                    <input matInput [matDatepicker]="pickerFin" [(ngModel)]="nuevaTarea.programacion_fin" name="programacion_finCrear" required>
+                    <mat-datepicker-toggle matSuffix [for]="pickerFin"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerFin></mat-datepicker>
+                  </mat-form-field>
+                  <mat-form-field appearance="fill" style="width:100%">
+                    <mat-label>Prioridad</mat-label>
+                    <mat-select [(ngModel)]="nuevaTarea.prioridad" name="prioridadCrear" required>
+                      <mat-option value="alta">Alta</mat-option>
+                      <mat-option value="media">Media</mat-option>
+                      <mat-option value="baja">Baja</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </form>
+              </mat-dialog-content>
+              <mat-dialog-actions align="end">
+                <button mat-button mat-dialog-close>Cancelar</button>
+                <button mat-raised-button color="primary" (click)="crearTarea()" [disabled]="!nuevaTarea.titulo || !nuevaTarea.usuarios_id || !nuevaTarea.programacion_inicio || !nuevaTarea.programacion_fin">Crear</button>
+              </mat-dialog-actions>
+            </ng-template>

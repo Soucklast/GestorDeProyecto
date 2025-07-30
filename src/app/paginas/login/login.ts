@@ -39,10 +39,10 @@ export class Login {
     }
     this.error = '';
     const payload = { email: this.username, password: this.password };
-    this.http.post<any>('http://34.70.174.29/api/login', payload)
+    this.http.post<any>('https://apigestiones.apkfmedekkmewlmewmde.shop/api/login', payload)
       .subscribe({
         next: (response) => {
-          // Guardar token, userId y equipos_id en localStorage si existen en la respuesta
+          // Guardar token, userId, equipos_id y rol en localStorage si existen en la respuesta
           if (response.token) {
             localStorage.setItem('token', response.token);
           }
@@ -51,6 +51,14 @@ export class Login {
           }
           if (response.equipos_id) {
             localStorage.setItem('equipos_id', response.equipos_id.toString());
+            localStorage.setItem('equipo_activo_id', response.equipos_id.toString());
+          } else {
+            // Si no viene equipo activo, limpiar cualquier valor previo
+            localStorage.removeItem('equipos_id');
+            localStorage.removeItem('equipo_activo_id');
+          }
+          if (response.rol) {
+            localStorage.setItem('rol', response.rol);
           }
           // Si la autenticación es exitosa, navega a /inicio
           this.router.navigate(['/inicio']);
@@ -80,8 +88,33 @@ export class Login {
       return;
     }
     this.signupError = '';
-    // TODO: Replace with real registration logic
-    alert(`Registrado como ${this.signupName} (${this.signupEmail})`);
-    this.togglePanel(false);
+    const payload: any = {
+      nombre: this.signupName,
+      email: this.signupEmail,
+      password: this.signupPassword,
+      rol: 'admin',
+      imagen: null,
+      equipo_activo_id: null
+    };
+    this.http.post<any>('https://apigestiones.apkfmedekkmewlmewmde.shop/api/usuarios', payload).subscribe({
+      next: (resp) => {
+        if (resp.success) {
+          if (resp.data && resp.data.rol) {
+            localStorage.setItem('rol', resp.data.rol);
+          }
+          alert('Usuario registrado correctamente. Ahora puedes iniciar sesión.');
+          this.togglePanel(false);
+        } else {
+          this.signupError = 'No se pudo registrar el usuario.';
+        }
+      },
+      error: (err: HttpErrorResponse) => {
+        if (err.status === 409) {
+          this.signupError = 'El correo ya está registrado.';
+        } else {
+          this.signupError = 'Ocurrió un error al registrar. Inténtalo nuevamente.';
+        }
+      }
+    });
   }
 }

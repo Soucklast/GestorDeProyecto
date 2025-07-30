@@ -17,7 +17,7 @@ export class Perfil {
   constructor(private http: HttpClient, private cdr: ChangeDetectorRef, private router: Router) {
     const userId = localStorage.getItem('userId');
     if (userId) {
-      this.http.get<any[]>('http://34.70.174.29/api/usuarios').subscribe(
+      this.http.get<any[]>('https://apigestiones.apkfmedekkmewlmewmde.shop/api/usuarios').subscribe(
         (usuarios) => {
           const usuario = usuarios.find(u => u.id == userId);
           if (usuario) {

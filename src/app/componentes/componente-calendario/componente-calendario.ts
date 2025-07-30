@@ -53,7 +53,7 @@ export class ComponenteCalendarioComponent implements OnInit {
       this.token = localStorage.getItem('token');
       this.userId = userIdStr ? parseInt(userIdStr, 10) : null;
       // Cargar equipos para el select
-      this.http.get<any[]>('http://34.70.174.29/api/equipos').subscribe({
+      this.http.get<any[]>('https://apigestiones.apkfmedekkmewlmewmde.shop/api/equipos').subscribe({
         next: equipos => {
           this.equipos = equipos;
         },
@@ -78,14 +78,14 @@ export class ComponenteCalendarioComponent implements OnInit {
     // 1) Obtener proyectos del equipo
     this.http
       .get<{ success: boolean; equipo_id: number; data: any[] }>(
-        `http://34.70.174.29/api/equipos/${teamId}/proyectos`
+        `https://apigestiones.apkfmedekkmewlmewmde.shop/api/equipos/${teamId}/proyectos`
       )
       .subscribe(projRes => {
         const proyectos = projRes.data;
         // 2) Por cada proyecto, pedimos sus tareas
         const tareas$ = proyectos.map(p =>
           this.http.get<{ success: boolean; proyecto_id: number; data: any[] }>(
-            `http://34.70.174.29/api/proyectos/${p.id}/tareas`
+            `https://apigestiones.apkfmedekkmewlmewmde.shop/api/proyectos/${p.id}/tareas`
           )
         );
         // 3) Esperamos a que todas las peticiones terminen

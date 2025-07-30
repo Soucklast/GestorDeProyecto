@@ -25,9 +25,22 @@ import { HttpClientModule } from '@angular/common/http';
   styleUrls: ['./inicio.css']
 })
 export class InicioComponent {
-  vista: 'perfil' | 'proyectos' | 'usuarios' | 'calendario' = 'proyectos';
+  vista: 'perfil' | 'proyectos' | 'equipos' | 'calendario' = 'proyectos';
 
-  cambiarVista(v: 'perfil' | 'proyectos' | 'usuarios' | 'calendario') {
+  rol: 'admin' | 'cliente' = 'cliente';
+
+  ngOnInit() {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      const rolGuardado = localStorage.getItem('rol');
+      if (rolGuardado === 'admin' || rolGuardado === 'cliente') {
+        this.rol = rolGuardado;
+      }
+    }
+  }
+
+  cambiarVista(v: 'perfil' | 'proyectos' | 'equipos' | 'calendario') {
     this.vista = v;
   }
+
+
 }

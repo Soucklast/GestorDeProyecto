@@ -26,17 +26,19 @@
         ¿Ya tienes cuenta? <a href="#" (click)="togglePanel(false)">Inicia sesión</a>
       </div>
       <form (ngSubmit)="register()" autocomplete="off">
-        <div class="input-group">
-          <label for="signup-username">Usuario</label>
-          <input id="signup-username" type="text" [(ngModel)]="signupName" name="signupName" placeholder="Tu usuario" required />
-        </div>
-        <div class="input-group">
-          <label for="signup-email">Correo electrónico</label>
-          <input id="signup-email" type="email" [(ngModel)]="signupEmail" name="signupEmail" placeholder="tucorreo@ejemplo.com" required />
-        </div>
-        <div class="input-group">
-          <label for="signup-password">Contraseña</label>
-          <input id="signup-password" type="password" [(ngModel)]="signupPassword" name="signupPassword" placeholder="Mínimo 5 caracteres" required minlength="5" />
+        <div class="signup-grid">
+          <div class="input-group">
+            <label for="signup-username">Usuario</label>
+            <input id="signup-username" type="text" [(ngModel)]="signupName" name="signupName" placeholder="Tu usuario" required />
+          </div>
+          <div class="input-group">
+            <label for="signup-email">Correo electrónico</label>
+            <input id="signup-email" type="email" [(ngModel)]="signupEmail" name="signupEmail" placeholder="tucorreo@ejemplo.com" required />
+          </div>
+          <div class="input-group">
+            <label for="signup-password">Contraseña</label>
+            <input id="signup-password" type="password" [(ngModel)]="signupPassword" name="signupPassword" placeholder="Mínimo 5 caracteres" required minlength="5" />
+          </div>
         </div>
         <button type="submit" class="auth-btn">REGISTRARME</button>
         <div class="error" *ngIf="signupError">{{ signupError }}</div>

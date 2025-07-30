@@ -49,6 +49,7 @@ import { DragDropModule, CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-
   ]
 })
 export class ComponenteProyectosComponent implements OnInit {
+  userRol: string | null = null;
   // Diálogo y lógica de edición de tarea
   @ViewChild('dialogoEditarTarea') dialogoEditarTarea!: TemplateRef<any>;
   dialogRefEditarTarea!: MatDialogRef<any>;
@@ -95,13 +96,20 @@ export class ComponenteProyectosComponent implements OnInit {
           // Actualizar la fila en dataSource
           const idx = this.dataSource.findIndex(t => t.id === this.tareaEditando.id);
           if (idx > -1) {
+            // Buscar el nombre del usuario asignado actualizado
+            let asignadoA = '';
+            if (this.tareaEditando.usuarios_id && Array.isArray(this.usersEquipo) && this.usersEquipo.length > 0) {
+              const usuario = this.usersEquipo.find(u => u.id === this.tareaEditando.usuarios_id);
+              asignadoA = usuario ? usuario.nombre || usuario.name || usuario.username || '' : '';
+            }
             this.dataSource[idx] = {
               ...this.dataSource[idx],
               title: resp.data.titulo,
               startDate: resp.data.programacion_inicio ? new Date(resp.data.programacion_inicio) : null,
               endDate: resp.data.programacion_fin ? new Date(resp.data.programacion_fin) : null,
               priority: resp.data.prioridad ? this.capitalizeFirst(resp.data.prioridad) : '',
-              status: resp.data.estatus ? this.capitalizeFirst(resp.data.estatus) : ''
+              status: resp.data.estatus ? this.capitalizeFirst(resp.data.estatus) : '',
+              asignadoA
             };
             this.dataSource = [...this.dataSource];
           }
@@ -125,6 +133,7 @@ export class ComponenteProyectosComponent implements OnInit {
   }
   // Lista de usuarios para selects en el template (alias de usuarios)
   users: any[] = [];
+  usersEquipo: any[] = [];
   // Parámetro: ID de equipo, usuario y token obtenidos del login
   equipoId: number | null = null;
   userId: number | null = null;
@@ -144,10 +153,7 @@ export class ComponenteProyectosComponent implements OnInit {
   nuevoProyecto = {
     nombre: '',
     descripcion: '',
-    equipo_id: null as number | null,
-    integrantes: [] as any[],
-    fechaInicio: null as Date | null,
-    fechaFin: null as Date | null
+    equipo_id: null as number | null
   };
 
   equipos: Array<{ id: number; Nombre: string }> = [];
@@ -172,7 +178,7 @@ export class ComponenteProyectosComponent implements OnInit {
   selectedRow: any;
 
   // Tabla de tareas (ahora dinámicas por proyecto)
-  displayedColumns: string[] = ['checkbox', 'title', 'schedule', 'priority', 'status'];
+  displayedColumns: string[] = ['checkbox', 'title', 'asignadoA', 'schedule', 'priority', 'status'];
   dataSource: Array<any> = [];
 
   // Usuarios obtenidos de la API
@@ -197,12 +203,13 @@ export class ComponenteProyectosComponent implements OnInit {
     // Solo acceder a localStorage en el navegador
     if (isPlatformBrowser(this.platformId)) {
       const equipoIdStr = localStorage.getItem('equipos_id');
+      this.userRol = localStorage.getItem('rol') || localStorage.getItem('role') || null;
       this.equipoId = equipoIdStr ? parseInt(equipoIdStr, 10) : null;
       const userIdStr = localStorage.getItem('userId');
       this.token = localStorage.getItem('token');
       this.userId = userIdStr ? parseInt(userIdStr, 10) : null;
       // Cargar equipos para el select
-      this.http.get<any[]>('http://34.70.174.29/api/equipos').subscribe({
+      this.http.get<any[]>('https://apigestiones.apkfmedekkmewlmewmde.shop/api/equipos').subscribe({
         next: equipos => {
           this.equipos = equipos;
         },
@@ -211,8 +218,8 @@ export class ComponenteProyectosComponent implements OnInit {
           console.error('Error al cargar equipos', err);
         }
       });
-      // Cargar usuarios para el select
-      this.http.get<any[]>('http://34.70.174.29/api/usuarios').subscribe({
+      // Cargar usuarios para el select (todos)
+      this.http.get<any[]>('https://apigestiones.apkfmedekkmewlmewmde.shop/api/usuarios').subscribe({
         next: usuarios => {
           this.usuarios = usuarios;
           this.users = usuarios; // Sincroniza para el template
@@ -223,6 +230,18 @@ export class ComponenteProyectosComponent implements OnInit {
           console.error('Error al cargar usuarios', err);
         }
       });
+      // Cargar usuarios del equipo activo para el select de crear tarea
+      if (this.equipoId) {
+        this.http.get<any[]>(`https://apigestiones.apkfmedekkmewlmewmde.shop/api/equipos/${this.equipoId}/usuarios`).subscribe({
+          next: usuarios => {
+            this.usersEquipo = usuarios;
+          },
+          error: err => {
+            this.usersEquipo = [];
+            console.error('Error al cargar usuarios del equipo', err);
+          }
+        });
+      }
       console.log('[Depuración] Valor de equipos_id en localStorage:', equipoIdStr);
       if (this.equipoId) {
         console.log('[Depuración] Usando equipoId para cargar proyectos:', this.equipoId);
@@ -235,7 +254,7 @@ export class ComponenteProyectosComponent implements OnInit {
 
   // Carga proyectos desde la API
   cargarProyectos(equipoId: number): void {
-    const url = `http://34.70.174.29/api/equipos/${equipoId}/proyectos`;
+    const url = `https://apigestiones.apkfmedekkmewlmewmde.shop/api/equipos/${equipoId}/proyectos`;
     console.log('[Depuración] Consultando proyectos con URL:', url);
     this.http.get<any>(url).subscribe({
       next: resp => {
@@ -285,21 +304,30 @@ export class ComponenteProyectosComponent implements OnInit {
 
   // Cargar tareas de un proyecto desde la API
   cargarTareas(proyectoId: number): void {
-    const url = `http://34.70.174.29/api/proyectos/${proyectoId}/tareas`;
+    const url = `https://apigestiones.apkfmedekkmewlmewmde.shop/api/proyectos/${proyectoId}/tareas`;
     console.log('[Depuración] Consultando tareas con URL:', url);
     this.http.get<any>(url).subscribe({
       next: resp => {
         console.log('[Depuración] Respuesta de la API al consultar tareas:', resp);
         if (resp.success && Array.isArray(resp.data)) {
-          const tareas = resp.data.map((t: any) => ({
-            id: t.id,
-            title: t.titulo,
-            startDate: t.programacion_inicio ? new Date(t.programacion_inicio) : null,
-            endDate: t.programacion_fin ? new Date(t.programacion_fin) : null,
-            priority: t.prioridad ? this.capitalizeFirst(t.prioridad) : '',
-            status: t.estatus ? this.capitalizeFirst(t.estatus) : '',
-            selected: false
-          }));
+          // Mapear tareas y buscar el nombre del usuario asignado
+          const tareas = resp.data.map((t: any) => {
+            let asignadoA = '';
+            if (t.usuarios_id && Array.isArray(this.usersEquipo) && this.usersEquipo.length > 0) {
+              const usuario = this.usersEquipo.find(u => u.id === t.usuarios_id);
+              asignadoA = usuario ? usuario.nombre || usuario.name || usuario.username || '' : '';
+            }
+            return {
+              id: t.id,
+              title: t.titulo,
+              startDate: t.programacion_inicio ? new Date(t.programacion_inicio) : null,
+              endDate: t.programacion_fin ? new Date(t.programacion_fin) : null,
+              priority: t.prioridad ? this.capitalizeFirst(t.prioridad) : '',
+              status: t.estatus ? this.capitalizeFirst(t.estatus) : '',
+              asignadoA,
+              selected: false
+            };
+          });
           this.actualizarDataSourceSeguro(tareas);
           console.log('[Depuración] Tareas cargadas:', tareas);
         } else {
@@ -322,35 +350,43 @@ export class ComponenteProyectosComponent implements OnInit {
 
   // Crear proyecto local
   abrirDialogoProyecto() {
+    if (!this.equipoId) {
+      alert('Debes seleccionar un equipo activo antes de crear un proyecto. Ve a la administración de usuarios y elige un equipo.');
+      return;
+    }
     this.nuevoProyecto = { 
       nombre: '', 
       descripcion: '', 
-      equipo_id: null, 
-      integrantes: [], 
-      fechaInicio: null, 
-      fechaFin: null 
+      equipo_id: this.equipoId // Usar el equipoId del usuario
     };
     this.dialogRefProyecto = this.dialog.open(this.dialogoProyecto, { width: '400px' });
   }
   agregarProyecto() {
-    if (!this.nuevoProyecto.nombre || !this.nuevoProyecto.equipo_id) {
-      alert('Falta el nombre del proyecto o el equipo.');
+    if (!this.nuevoProyecto.nombre) {
+      alert('Falta el nombre del proyecto.');
       return;
     }
+    if (!this.nuevoProyecto.descripcion) {
+      alert('Falta la descripción del proyecto.');
+      return;
+    }
+    // Asignar el equipoId del usuario por seguridad
+    this.nuevoProyecto.equipo_id = this.equipoId;
     const body = {
       nombre: this.nuevoProyecto.nombre,
       descripcion: this.nuevoProyecto.descripcion,
       equipos_id: this.nuevoProyecto.equipo_id
     };
-    this.http.post<any>('http://34.70.174.29/api/proyectos', body).subscribe({
+    this.http.post<any>('https://apigestiones.apkfmedekkmewlmewmde.shop/api/proyectos', body).subscribe({
       next: resp => {
         if (resp.success && resp.data) {
           this.proyectos = [...this.proyectos, resp.data];
           this.dialogRefProyecto.close();
+          this.cdr.detectChanges();
         } else {
           alert('No se pudo crear el proyecto.');
+          this.cdr.detectChanges();
         }
-        this.cdr.detectChanges();
       },
       error: err => {
         alert('Error al crear el proyecto.');
@@ -364,10 +400,9 @@ export class ComponenteProyectosComponent implements OnInit {
   abrirDialogoEditarProyecto(proyecto: any, event: Event) {
     event.stopPropagation();
     this.proyectoEditando = {
-      ...proyecto,
-      integrantes: proyecto.integrantes ? [...proyecto.integrantes] : [],
-      fechaInicio: proyecto.fechaInicio ? new Date(proyecto.fechaInicio) : null,
-      fechaFin: proyecto.fechaFin ? new Date(proyecto.fechaFin) : null
+      id: proyecto.id,
+      nombre: proyecto.nombre,
+      descripcion: proyecto.descripcion
     };
     this.dialogRefEditarProyecto = this.dialog.open(this.dialogoEditarProyecto, { width: '400px' });
   }
@@ -378,10 +413,9 @@ export class ComponenteProyectosComponent implements OnInit {
     }
     const body: any = {
       nombre: this.proyectoEditando.nombre,
-      descripcion: this.proyectoEditando.descripcion,
-      equipos_id: this.proyectoEditando.equipo_id
+      descripcion: this.proyectoEditando.descripcion
     };
-    this.http.put<any>(`http://34.70.174.29/api/proyectos/${this.proyectoEditando.id}`, body).subscribe({
+    this.http.patch<any>(`https://apigestiones.apkfmedekkmewlmewmde.shop/api/proyectos/${this.proyectoEditando.id}`, body).subscribe({
       next: resp => {
         if (resp.success && resp.data) {
           const idx = this.proyectos.findIndex(p => p.id === this.proyectoEditando.id);
@@ -390,10 +424,11 @@ export class ComponenteProyectosComponent implements OnInit {
             this.proyectos = [...this.proyectos];
           }
           this.dialogRefEditarProyecto.close();
+          this.cdr.detectChanges();
         } else {
           alert('No se pudo actualizar el proyecto.');
+          this.cdr.detectChanges();
         }
-        this.cdr.detectChanges();
       },
       error: err => {
         alert('Error al actualizar el proyecto.');
@@ -408,13 +443,14 @@ export class ComponenteProyectosComponent implements OnInit {
     event.stopPropagation();
     if (!proyecto?.id) return;
     if (!confirm('¿Seguro que deseas eliminar este proyecto?')) return;
-    this.http.delete<any>(`http://34.70.174.29/api/proyectos/${proyecto.id}`).subscribe({
+    this.http.delete<any>(`https://apigestiones.apkfmedekkmewlmewmde.shop/api/proyectos/${proyecto.id}`).subscribe({
       next: resp => {
         if (resp.success) {
           this.proyectos = this.proyectos.filter(p => p.id !== proyecto.id);
           if (this.proyectoSeleccionado?.id === proyecto.id) {
             this.proyectoSeleccionado = null;
           }
+          alert(resp.message || 'Proyecto eliminado correctamente');
         } else {
           alert('No se pudo eliminar el proyecto.');
         }
@@ -443,7 +479,7 @@ export class ComponenteProyectosComponent implements OnInit {
   deleteRow(row: any) {
     if (!row?.id) return;
     if (!confirm('¿Seguro que deseas eliminar esta tarea?')) return;
-    this.http.delete(`http://34.70.174.29/api/tareas/${row.id}`, { observe: 'response' }).subscribe({
+    this.http.delete(`https://apigestiones.apkfmedekkmewlmewmde.shop/api/tareas/${row.id}`, { observe: 'response' }).subscribe({
       next: resp => {
         if (resp.status === 204) {
           this.dataSource = this.dataSource.filter(r => r.id !== row.id);
@@ -485,7 +521,23 @@ export class ComponenteProyectosComponent implements OnInit {
       estatus: 'pendiente',
       proyectos_id: this.proyectoSeleccionado.id
     };
-    this.dialogRefCrearTarea = this.dialog.open(this.dialogoCrearTarea, { width: '400px' });
+    // Consulta los usuarios del equipo activo usando la nueva URL
+    if (this.equipoId) {
+      this.http.get<any[]>(`https://apigestiones.apkfmedekkmewlmewmde.shop/api/equipos/${this.equipoId}/usuarios`).subscribe({
+        next: usuarios => {
+          this.usersEquipo = usuarios;
+          this.dialogRefCrearTarea = this.dialog.open(this.dialogoCrearTarea, { width: '400px' });
+        },
+        error: err => {
+          this.usersEquipo = [];
+          this.dialogRefCrearTarea = this.dialog.open(this.dialogoCrearTarea, { width: '400px' });
+          console.error('Error al cargar usuarios del equipo', err);
+        }
+      });
+    } else {
+      this.usersEquipo = [];
+      this.dialogRefCrearTarea = this.dialog.open(this.dialogoCrearTarea, { width: '400px' });
+    }
   }
 
   crearTarea() {
@@ -508,17 +560,23 @@ export class ComponenteProyectosComponent implements OnInit {
       estatus: 'pendiente',
       proyectos_id: this.nuevaTarea.proyectos_id
     };
-    this.http.post<any>('http://34.70.174.29/api/tareas', body).subscribe({
+    this.http.post<any>('https://apigestiones.apkfmedekkmewlmewmde.shop/api/tareas', body).subscribe({
       next: resp => {
         if (resp.data) {
           // Crear la asignación después de crear la tarea
           const tareaId = resp.data.id;
           const usuarioId = this.nuevaTarea.usuarios_id;
-          this.http.post<any>('http://34.70.174.29/api/Asignaciones', {
+          this.http.post<any>('https://apigestiones.apkfmedekkmewlmewmde.shop/api/Asignaciones', {
             tareas_id: tareaId,
             usuarios_id: usuarioId
           }).subscribe({
             next: () => {
+              // Buscar el nombre del usuario asignado
+              let asignadoA = '';
+              if (this.nuevaTarea.usuarios_id && Array.isArray(this.usersEquipo) && this.usersEquipo.length > 0) {
+                const usuario = this.usersEquipo.find(u => u.id === this.nuevaTarea.usuarios_id);
+                asignadoA = usuario ? usuario.nombre || usuario.name || usuario.username || '' : '';
+              }
               // Actualizar la tabla de tareas agregando la nueva tarea
               const tarea = {
                 id: resp.data.id,
@@ -527,6 +585,7 @@ export class ComponenteProyectosComponent implements OnInit {
                 endDate: resp.data.programacion_fin ? new Date(resp.data.programacion_fin) : null,
                 priority: resp.data.prioridad ? this.capitalizeFirst(resp.data.prioridad) : '',
                 status: resp.data.estatus ? this.capitalizeFirst(resp.data.estatus) : '',
+                asignadoA,
                 selected: false
               };
               this.dataSource = [...this.dataSource, tarea];

@@ -14,7 +14,7 @@
 .project-title {
   font-size: 1.1rem;
   font-weight: 600;
-  color: #3f51b5;
+  color: #941296;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -31,11 +31,13 @@
 }
 .mat-list-item .mat-icon-button {
   margin-left: 4px;
+  color: #941296;
 }
 .ui-main-center {
   display: flex;
   flex-direction: column;
-  background-color: #f5f5f5;
+  background-color: #f3e6f7;
+  min-height: 100vh;
 }
 
 .ui-top-panel {
@@ -110,8 +112,8 @@
 .ui-content-center {
   flex: 1;
   overflow: auto;
-  padding: 16px;
-  background-color: #fafafa;
+  padding: 24px 8vw;
+  background-color: #f8f0fa;
 }
 
 /* Estilos para tabla */
@@ -142,10 +144,13 @@
 }
 
 .status-badge {
-  background-color: #e0e0e0;
-  padding: 4px 8px;
+  background-color: #f3e6f7;
+  color: #941296;
+  padding: 4px 12px;
   border-radius: 12px;
-  font-size: 0.8rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
 }
 
 /* Estilos para calendario */
@@ -175,12 +180,13 @@
 /* Estilos generales */
 .mat-header-cell {
   font-weight: bold;
-  color: rgba(0, 0, 0, 0.87);
-  background-color: #f5f5f5;
+  color: #941296;
+  background-color: #f3e6f7;
 }
 
 .mat-cell, .mat-header-cell {
   padding: 0 16px;
+  font-size: 1rem;
 }
 
 /* componente-proyectos.css */
@@ -270,7 +276,7 @@
 }
 
 .priority-low {
-  color: #b514ba; /* Azul */
+  color: #941296; /* Morado */
 }
 
 /* Estilos para el botón de agregar */

@@ -1,3 +1,25 @@
+/* Grid para registro */
+.signup-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  margin-bottom: 1.2rem;
+}
+
+/* Estilo para selects igual que inputs */
+.input-group select {
+  padding: 0.9rem 1rem;
+  border: 1.5px solid #b39ddb;
+  border-radius: 7px;
+  font-size: 1.1rem;
+  background: #f6f3fa;
+  transition: border 0.2s;
+  width: 100%;
+}
+.input-group select:focus {
+  border-color: #7e57c2;
+  outline: none;
+}
 body, html {
   height: 100%;
   margin: 0;
