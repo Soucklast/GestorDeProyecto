@@ -183,6 +183,9 @@ El calendario muestra una vista mensual con las tareas asignadas:
 
 **Repository:** [AXEL00000000/laravel](https://github.com/AXEL00000000/laravel.git)
 
+ Dominio base:https://apigestiones.apkfmedekkmewlmewmde.shop
+
+
 ---
 
 ## Índice
