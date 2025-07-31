@@ -39,7 +39,7 @@ Project Manager es una plataforma web diseñada para la gestión integral de pro
 
 * [Node.js](https://nodejs.org/) v14+
 * [Angular CLI](https://angular.io/cli)
-* [MySQL](https://www.mysql.com/) o PostgreSQL
+* [MySQL](https://www.mysql.com/) 
 * Laravel v12
 * Cuenta de GitHub para clonar el repositorio
 
