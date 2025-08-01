@@ -117,8 +117,11 @@ En la sección **Proyectos** encontrarás un tablero donde puedes(es necesario t
 * **Eliminar** proyectos ya finalizados o cancelados.
 
 <img width="1906" height="865" alt="image" src="https://github.com/user-attachments/assets/cdc30ff7-2833-4da3-b9f6-ecb25ca46959" />
+
 <img width="1918" height="827" alt="image" src="https://github.com/user-attachments/assets/8626b57e-dd0b-4d4e-93fa-5f48bbbb92c3" />
+
 <img width="1916" height="880" alt="image" src="https://github.com/user-attachments/assets/76fb2989-03fd-4d96-9fa5-0809a50e94c1" />
+
 <img width="1916" height="881" alt="image" src="https://github.com/user-attachments/assets/a6e78bd3-a5bb-493f-b442-8d4fdaba8e79" />
 
 ---
@@ -140,13 +143,17 @@ Acciones disponibles:
 4. **Eliminar:** Remueve la tarea del listado.
 <img width="1433" height="780" alt="image" src="https://github.com/user-attachments/assets/f4bc61ca-aed0-42b9-86fb-545234d0f43e" />
 
+<img width="1903" height="908" alt="image" src="https://github.com/user-attachments/assets/fec00eb1-7b14-455f-9eae-2e1415b6571e" />
+
+
 ---
 
 ## Sección de Perfil
 
 Tu sección **Perfil** muestra información del usurio y podras cerrar sesion.
 
-<img width="1908" height="879" alt="image" src="https://github.com/user-attachments/assets/45479552-f369-4e5a-95f7-6d11c4b99bc5" />
+<img width="1905" height="897" alt="image" src="https://github.com/user-attachments/assets/f88db208-bc05-4a80-9e7a-5f41544d1ea4" />
+
 
 >
 
@@ -161,6 +168,9 @@ En **Equipos** puedes gestionar la lista de equipos y definir tu equipo activo:
 * El rol se actualiza según la configuración del equipo activo.
 
 <img width="1912" height="883" alt="image" src="https://github.com/user-attachments/assets/724ba454-4cdc-48ec-b7b5-ca05a26ce130" />
+
+<img width="1894" height="914" alt="image" src="https://github.com/user-attachments/assets/9fde883d-4c0f-49b8-9807-12d200a30a5b" />
+
 
 ---
 
@@ -523,11 +533,15 @@ El calendario muestra una vista mensual con las tareas asignadas:
   ```
 * **Respuesta (200 OK):** Objeto JSON del usuario actualizado.
 
+<img width="1768" height="877" alt="image" src="https://github.com/user-attachments/assets/0dc33916-f292-436b-94ed-2b026c872ce2" />
+
 ### 3.5 Cambiar solo el equipo activo
+
+* **Descripción:** cambia el equipo activo de un uasuario tiene que ser un equipo que se le encuentre asignado al usuario
+
 
 * **Método:** `PATCH`
 * **Endpoint:**
-
   ```
   /usuarios/{id}/equipo-activo
   ```
@@ -537,6 +551,8 @@ El calendario muestra una vista mensual con las tareas asignadas:
   ```json
   { "equipo_activo_id": 3 }
   ```
+  <img width="1762" height="894" alt="image" src="https://github.com/user-attachments/assets/7b7e7dee-0340-4ddd-9d93-46522024b34d" />
+
 * **Respuesta (200 OK):** Usuario con equipo activo actualizado.
 
 ### 3.6 Autenticación (login)
@@ -557,8 +573,10 @@ El calendario muestra una vista mensual con las tareas asignadas:
 
   * **200 OK:** Usuario autenticado
   * **401 Unauthorized:** `{ "message": "Credenciales inválidas" }`
-
 ---
+
+<img width="1766" height="845" alt="image" src="https://github.com/user-attachments/assets/2531a95a-179f-4a4f-81cb-07104c24cf9c" />
+
 
 ## 4. Tareas
 
@@ -570,6 +588,8 @@ El calendario muestra una vista mensual con las tareas asignadas:
   ```
   /tareas
   ```
+  <img width="1761" height="920" alt="image" src="https://github.com/user-attachments/assets/f2c0e319-a599-41ce-9a71-411304a657b7" />
+
 * **Respuesta (200 OK):** Array JSON de tareas.
 
 ### 4.2 Listar tareas de un proyecto
@@ -582,6 +602,9 @@ El calendario muestra una vista mensual con las tareas asignadas:
   ```
 * **Respuesta (200 OK):** `{ "success": true, "proyecto_id": <proyecto>, "data": [/* tareas */] }`
 
+<img width="1769" height="920" alt="image" src="https://github.com/user-attachments/assets/1f1deca8-ca15-4795-b5f7-b0210f1915c9" />
+
+
 ### 4.3 Ver una tarea concreta
 
 * **Método:** `GET`
@@ -592,6 +615,9 @@ El calendario muestra una vista mensual con las tareas asignadas:
   ```
 * **Respuesta (200 OK):** Objeto JSON de la tarea.
 * **Respuesta (404):** Si no existe la tarea.
+
+ <img width="1745" height="868" alt="image" src="https://github.com/user-attachments/assets/9aae8454-a069-4c3b-a2f7-a4c23d564fbe" />
+
 
 ### 4.4 Crear una nueva tarea
 
@@ -616,6 +642,9 @@ El calendario muestra una vista mensual con las tareas asignadas:
   ```
 * **Respuesta (201 Created):** Mensaje y objeto tarea.
 
+<img width="1759" height="912" alt="image" src="https://github.com/user-attachments/assets/0f2caf76-38ea-4165-a87f-67993b97979c" />
+
+
 ### 4.5 Actualizar una tarea
 
 * **Métodos:** `PUT` / `PATCH`
@@ -631,6 +660,9 @@ El calendario muestra una vista mensual con las tareas asignadas:
   ```
 * **Respuesta (200 OK):** Mensaje y objeto tarea actualizado.
 
+<img width="1773" height="913" alt="image" src="https://github.com/user-attachments/assets/7e734b22-14b5-4b98-b3c4-018b4d55a44a" />
+
+
 ### 4.6 Eliminar una tarea
 
 * **Método:** `DELETE`
@@ -642,6 +674,9 @@ El calendario muestra una vista mensual con las tareas asignadas:
 * **Respuesta (204 No Content)**
 
 ---
+
+<img width="1758" height="411" alt="image" src="https://github.com/user-attachments/assets/81477079-7c78-4ded-a006-e4b16cec969e" />
+
 
 ## 5. Asignaciones
 
@@ -655,6 +690,9 @@ El calendario muestra una vista mensual con las tareas asignadas:
   ```
 * **Respuesta (200 OK):** Array JSON.
 
+<img width="1739" height="850" alt="image" src="https://github.com/user-attachments/assets/0a85dd29-3391-47df-a7db-ed4191e3f343" />
+
+
 ### 5.2 Ver una asignación concreta
 
 * **Método:** `GET`
@@ -664,6 +702,9 @@ El calendario muestra una vista mensual con las tareas asignadas:
   /Asignaciones/{id}
   ```
 * **Respuesta (200 OK):** Objeto JSON.
+
+<img width="1767" height="863" alt="image" src="https://github.com/user-attachments/assets/82c6ab0e-f94e-407b-bb83-f5bbb517a909" />
+
 
 ### 5.3 Crear una asignación
 
@@ -680,6 +721,9 @@ El calendario muestra una vista mensual con las tareas asignadas:
   ```
 * **Respuesta (201 Created):** Objeto asignación.
 
+  <img width="1758" height="851" alt="image" src="https://github.com/user-attachments/assets/b70d5379-fa91-46f4-9875-4468a287e540" />
+
+
 ### 5.4 Actualizar una asignación
 
 * **Métodos:** `PUT` / `PATCH`
@@ -695,6 +739,9 @@ El calendario muestra una vista mensual con las tareas asignadas:
   ```
 * **Respuesta (200 OK):** Objeto asignación actualizado.
 
+<img width="1763" height="859" alt="image" src="https://github.com/user-attachments/assets/b6dd6a55-f393-4db5-aaf1-dad9fef5e587" />
+
+
 ### 5.5 Eliminar una asignación
 
 * **Método:** `DELETE`
@@ -705,6 +752,9 @@ El calendario muestra una vista mensual con las tareas asignadas:
   ```
 * **Respuesta (204 No Content)**
 
+<img width="1751" height="177" alt="image" src="https://github.com/user-attachments/assets/18af64ca-59b3-4f96-b4b2-b4db8fba7a2f" />
+
+
 ### 5.6 Obtener tareas de un usuario
 
 * **Método:** `GET`
@@ -714,6 +764,9 @@ El calendario muestra una vista mensual con las tareas asignadas:
   /usuarios/{usuario}/tareas
   ```
 * **Respuesta (200 OK):** Array JSON de tareas.
+
+<img width="1767" height="691" alt="image" src="https://github.com/user-attachments/assets/06e2190d-59de-4534-91fe-e0e50fd07062" />
+
 
 ### 5.7 Obtener usuarios de una tarea
 
@@ -726,6 +779,9 @@ El calendario muestra una vista mensual con las tareas asignadas:
 * **Respuesta (200 OK):** Array JSON de usuarios.
 
 ---
+
+<img width="1750" height="664" alt="image" src="https://github.com/user-attachments/assets/ef2885a4-a613-40c3-80eb-d063a5ac6efd" />
+
 
 ## 6. Equipo–Usuario
 
@@ -821,8 +877,4 @@ El calendario muestra una vista mensual con las tareas asignadas:
 > ```
 
 
-1. **Clonar el repositorio**  
-   ```bash
-   git clone https://github.com/Soucklast/GestorDeProyecto
-   cd GestorDeProyecto
 
