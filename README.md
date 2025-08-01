@@ -797,6 +797,9 @@ El calendario muestra una vista mensual con las tareas asignadas:
   ```
 * **Respuesta (200 OK):** Array de objetos con relaciones.
 
+  <img width="1759" height="900" alt="image" src="https://github.com/user-attachments/assets/0422ecaf-c271-403e-bb4e-60cb1d349428" />
+
+
 ### 6.2 Ver una relación por ID
 
 * **Método:** `GET`
@@ -806,6 +809,9 @@ El calendario muestra una vista mensual con las tareas asignadas:
   /equipo-usuarios/{id}
   ```
 * **Respuesta (200 OK):** Objeto JSON con datos anidados.
+
+  <img width="1765" height="843" alt="image" src="https://github.com/user-attachments/assets/9572fdfc-2f63-486a-b9ad-5123e6d7a2c2" />
+
 
 ### 6.3 Crear una nueva relación
 
@@ -820,6 +826,8 @@ El calendario muestra una vista mensual con las tareas asignadas:
   ```json
   { "usuario_id": 10, "equipo_id": 5, "rol": "admin" }
   ```
+<img width="1750" height="876" alt="image" src="https://github.com/user-attachments/assets/d9f5dcf0-1b14-4452-a915-811bd7573208" />
+
 * **Respuesta (201 Created):** Objeto JSON creado.
 
 ### 6.4 Actualizar solo el rol
@@ -837,6 +845,9 @@ El calendario muestra una vista mensual con las tareas asignadas:
   ```
 * **Respuesta (200 OK):** Objeto JSON actualizado.
 
+  <img width="1759" height="840" alt="image" src="https://github.com/user-attachments/assets/73b1ced6-43b0-4d19-83f3-7e085e3e15bd" />
+
+
 ### 6.5 Eliminar una relación
 
 * **Método:** `DELETE`
@@ -847,6 +858,9 @@ El calendario muestra una vista mensual con las tareas asignadas:
   ```
 * **Respuesta (200 OK):** `{ "message": "Asignación eliminada correctamente." }`
 
+  <img width="1776" height="721" alt="image" src="https://github.com/user-attachments/assets/fcb81971-d9f6-4ec7-930f-604a66219cd1" />
+
+
 ### 6.6 Obtener usuarios de un equipo
 
 * **Método:** `GET`
@@ -856,6 +870,9 @@ El calendario muestra una vista mensual con las tareas asignadas:
   /equipos/{equipo}/usuarios
   ```
 * **Respuesta (200 OK):** Array JSON de usuarios.
+
+  <img width="1745" height="759" alt="image" src="https://github.com/user-attachments/assets/55d9670a-e519-4b6c-bf56-cee2324e4e13" />
+
 
 ### 6.7 Obtener equipos de un usuario
 
@@ -868,6 +885,9 @@ El calendario muestra una vista mensual con las tareas asignadas:
 * **Respuesta (200 OK):** Array JSON de equipos.
 
 ---
+
+<img width="1776" height="666" alt="image" src="https://github.com/user-attachments/assets/f74114ec-c436-4bae-95e6-0d021cee1c9c" />
+
 
 > **Importante:** Para todas las solicitudes con cuerpo (POST, PUT, PATCH), incluye siempre el encabezado `Content-Type: application/json`.
 > En las rutas que devuelven recursos, sigue la estructura estándar:
