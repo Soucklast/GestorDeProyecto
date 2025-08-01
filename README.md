@@ -145,6 +145,10 @@ Acciones disponibles:
 
 <img width="1903" height="908" alt="image" src="https://github.com/user-attachments/assets/fec00eb1-7b14-455f-9eae-2e1415b6571e" />
 
+<img width="1902" height="915" alt="image" src="https://github.com/user-attachments/assets/eed8d364-81b9-49fb-bafa-26d604d2c8f1" />
+
+<img width="1906" height="904" alt="image" src="https://github.com/user-attachments/assets/d56b9f09-fcd2-4f4c-82a0-e9cc0a5f4481" />
+
 
 ---
 
